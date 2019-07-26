@@ -1,20 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package voteapplication;
 
-/**
- *
- * @author KING
- */
 public class Voter {
     
     // public static void main(String[] args) {
         int voterId,aadharNo;
-        char voterName;
+        String voterName,city,address;
+        /*For the voter to register*/
+        private void voterRegistration(int voterId,int aadharNo,String voterName)
+        {
+            return checkUserInDatabase(voterId,aadharNo,voterName);
+        }
+        private boolean checkUserInDatabase(String voterName,int voterId,int aadharNo)
+        {
+           /*To check whether the votername,voterId,aadharNo already exists in database*/
+           return true;
+        }
+        
+        
+        /*For the voter to login*/
+        private boolean voterLogin(String votername,String password)
+       {
+           return checkUserInDatabase(votername,password);
+       }
+       private boolean checkUserInDatabase(String votername,String password)
+       {
+           /*To check whether the username already exists in database*/
+           return true;
+       }
+        
     
     public int getvoterId()
     {
@@ -24,7 +37,7 @@ public class Voter {
     {
        return aadharNo; 
     }
-    public string getvoterName()
+    public String getvoterName()
     {
        return voterName; 
     }
