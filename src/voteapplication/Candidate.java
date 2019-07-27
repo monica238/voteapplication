@@ -1,27 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package voteapplication;
-
-/**
- *
- * @author KING
- */
 public class Candidate {
-     
-        int candidateId,age,city,count;
-        String candidateFirstName,candidateParty;
+        int candidateId,age,candidateCity,count;
+        String candidateFirstName,candidatePartyName;
     
-    public int getcandidateId()
+    public int getCandidateId()
     {
       return candidateId;  
     }
-    public String getcandidateFirstName()
+    public int getAge()
+    {
+      return age;  
+    }
+     public int getCandidateCity()
+    {
+      return candidateCity;  
+    }
+    public String getCandidateFirstName()
     {
         return candidateFirstName;
+    }
+     public String getCandidatePartyName()
+    {
+      return candidatePartyName;  
     }
 }
             
