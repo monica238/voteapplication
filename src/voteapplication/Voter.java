@@ -3,14 +3,15 @@ package voteapplication;
 public class Voter {
     
     // public static void main(String[] args) {
-        int voterId,aadharNo;
-        String voterName,city,address;
+        int voterId,aadharNo,age;
+        String voterFirstName,city,address;
+        boolean voted;
         /*For the voter to register*/
-        private void voterRegistration(int voterId,int aadharNo,String voterName)
+        private void voterRegistration(int voterId,int aadharNo,int age,String voterName)
         {
-            return checkUserInDatabase(voterId,aadharNo,voterName);
+            return checkUserInDatabase(voterId,aadharNo,age,voterName);
         }
-        private boolean checkUserInDatabase(String voterName,int voterId,int aadharNo)
+        private boolean checkUserInDatabase(String voterFirstName,int voterId,int aadharNo)
         {
            /*To check whether the votername,voterId,aadharNo already exists in database*/
            return true;
@@ -18,11 +19,11 @@ public class Voter {
         
         
         /*For the voter to login*/
-        private boolean voterLogin(String votername,String password)
+        private boolean voterLogin(String voterFullName,String password)
        {
-           return checkUserInDatabase(votername,password);
+           return checkUserInDatabase(voterFullName,password);
        }
-       private boolean checkUserInDatabase(String votername,String password)
+       private boolean checkUserInDatabase(String voterFullName,String password)
        {
            /*To check whether the username already exists in database*/
            return true;
@@ -37,8 +38,8 @@ public class Voter {
     {
        return aadharNo; 
     }
-    public String getvoterName()
+    public String getvoterFirstName()
     {
-       return voterName; 
+       return voterFirstName; 
     }
 }

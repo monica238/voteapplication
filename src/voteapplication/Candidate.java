@@ -11,20 +11,17 @@ package voteapplication;
  * @author KING
  */
 public class Candidate {
-    
-    
-// public static void main(String[] args) {
      
-        int candidateId;
-        char candidateName;
+        int candidateId,age,city,count;
+        String candidateFirstName,candidateParty;
     
     public int getcandidateId()
     {
       return candidateId;  
     }
-    public string getcandidateName()
+    public String getcandidateFirstName()
     {
-        return candidateName;
+        return candidateFirstName;
     }
 }
             
