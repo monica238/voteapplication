@@ -1,45 +1,32 @@
 package voteapplication;
 
-public class Voter {
+public class Voter 
+{
     
-    // public static void main(String[] args) {
-        int voterId,aadharNo,age;
-        String voterFirstName,city,address;
-        boolean voted;
+        private int voterId,aadharNo,age;
+        private String voterFirstName,city,address;
+        private boolean voted;
         /*For the voter to register*/
-        private void voterRegistration(String voterName,int voterId,int aadharNo,int age)
+        public void voterRegistration(String voterFirstName,String city,String address,int voterId,int aadharNo,int age)
         {
+            this.voterFirstName=voterFirstName;
+            this.city=city;
+            this.address=address;
+            this.aadharNo=aadharNo;
+            this.voterId=voterId;
+            this.age=age;
+            
            // return checkVotersInDatabase(voterName,voterId,aadharNo,age);
         }
-        private boolean checkVotersInDatabase(String voterFirstName,int voterId,int aadharNo)
+        public boolean checkVotersInDatabase(int aadharNo)
         {
-           /*To check whether the votername,voterId,aadharNo already exists in database*/
-           return true;
+            if(this.aadharNo==aadharNo)
+              return true;
+           return false;
+        }     
+        
+        public String showVoterDetails()
+        {
+            return voterId+voterFirstName+aadharNo+address+city+age;
         }
-        
-        
-        /*For the voter to login*/
-        private boolean voterLogin(String voterFullName,String password)
-       {
-           return checkVotersInDatabase(voterFullName,password);
-       }
-       private boolean checkVotersInDatabase(String voterFullName,String password)
-       {
-           /*To check whether the username already exists in database*/
-           return true;
-       }
-        
-    
-    public int getvoterId()
-    {
-      return voterId;  
-    }
-    public int getaadharNo()
-    {
-       return aadharNo; 
-    }
-    public String getvoterFirstName()
-    {
-       return voterFirstName; 
-    }
 }

@@ -1,11 +1,13 @@
 package voteapplication;
 import java.io.DataInputStream;
 import java.lang.Exception;
+import java.util.ArrayList;
 
 public class Voteapplication {    
     public static void main(String[] args) {
         AdminRole admin=new AdminRole();
-        VoterRole voter=new VoterRole();
+        Voter voterInstance=new Voter();
+        ArrayList voterList=new ArrayList();
         
         String adminUserName;
         String adminPassword;
@@ -22,7 +24,11 @@ public class Voteapplication {
         if(admin.validateAdminLogin(adminUserName, adminPassword)==true)
         {
             System.out.println("Login Success");
-            createVoter();
+            voterInstance=createVoter();
+            voterList.add(voterInstance);
+            System.out.println(voterInstance.showVoterDetails());
+            System.out.println(voterList.size());
+            
             /*
             1. Voter Registration
             2. Candidate Registration
@@ -41,9 +47,51 @@ public class Voteapplication {
             System.out.println(e);
         }                              
     }
-     public static void createVoter()
-        {
-            System.out.println("Voter creation process is done here!");
+     public static Voter createVoter()
+        {                               
+           Voter voterInstance=new Voter();
+            
+            String voterFirstName;
+           int voterId;
+           int aadharNo;
+           int age;
+           String address;
+           String city;
+           DataInputStream in=new DataInputStream(System.in);
+           
+           try
+           {
+           System.out.println("Please provide your details");
+           
+           System.out.println("Enter your name:");
+           voterFirstName=in.readLine();
+           
+           System.out.println("Enter your voter id:");
+           voterId=Integer.parseInt(in.readLine());
+           
+           System.out.println("Enter your aadhar number:");
+           aadharNo=Integer.parseInt(in.readLine());
+           
+           System.out.println("Enter your age:");
+           age=Integer.parseInt(in.readLine());
+           
+           System.out.println("Enter your address:");
+           address=in.readLine();
+           
+           System.out.println("Enter your city:");
+           city=in.readLine();
+           
+           voterInstance.voterRegistration(voterFirstName, city, address, voterId, aadharNo, age);           
+           }
+           catch (Exception e)
+           {
+               System.out.println(e);
+           }
+           return voterInstance;
         }
+     public static void createCandidate()
+     {
+         System.out.println("Candidate creation process is done here");
+     }
     
 }
