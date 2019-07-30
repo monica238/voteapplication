@@ -1,5 +1,5 @@
-Classes
---------
+Classes and Sequence of operations
+---------------------------------
 Voter
 - Accept the voter details 
 - Validate voter identity
