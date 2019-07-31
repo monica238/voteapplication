@@ -1,4 +1,4 @@
-Classes and Sequence of operations
+Classes and Sequence of operations - modified
 ---------------------------------
 Voter
 - Accept the voter details 
