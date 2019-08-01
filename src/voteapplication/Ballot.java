@@ -1,7 +1,7 @@
 package voteapplication;
 public class Ballot {
         int candidateId;
-        String candidateFirstName,candidatePartyName;
+        String candidateFirstName,candidateParty;
     
 public int getcandidateId()
  {
@@ -13,10 +13,18 @@ public String getcandidateFirstName()
     voteapplication.Candidate obj=new voteapplication.Candidate();
    return candidateFirstName;
 }
-public String getcandidatePartyName()
+public String getcandidateParty()
 {
     voteapplication.Candidate obj=new voteapplication.Candidate();
-   return candidatePartyName;
+   return candidateParty;
+}
+public boolean checkBallotcreationInDatabase(String candidateFirstName,String candidateParty)
+{
+    if(this.candidateFirstName.compareTo(candidateFirstName)==0 && this.candidateParty.compareTo(candidateParty)==0)
+        {
+            return true;
+        }
+        return false;
 }
 
     
