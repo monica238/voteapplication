@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package voteapplication;
-
 /**
- *
- * @author USER1
+ * @author Monica
+ *@datecreated 27-Jul-2019
  */
+/* Class definition to access admin login*/
 public class AdminRole {
     private String adminUserName;
     private String adminPassword;
@@ -18,7 +13,7 @@ public class AdminRole {
         adminUserName="admin";
         adminPassword="password";
     }
-    
+    /* Method to validate admin login*/
     public boolean validateAdminLogin(String userName,String password)
     {
         if(this.adminUserName.compareTo(userName)==0 && this.adminPassword.compareTo(password)==0)

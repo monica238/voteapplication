@@ -8,11 +8,22 @@ public class Voteapplication
    public static void main(String[] args) 
    {
      AdminRole admin=new AdminRole();
-     VoterRole voterInstance=new VoterRole();
-     Candidate candidateInstance=new Candidate();
+     
+     VoterRole voterInstance1;
+     VoterRole voterInstance2;
+     VoterRole voterInstance3;
+     
+     Candidate candidateInstance1;
+     Candidate candidateInstance2;     
      CastVote castVoteInstance=new CastVote();
+     
+     Ballot ballotForVoting;
+     
      ArrayList voterList=new ArrayList();
      ArrayList candidateList=new ArrayList();
+     ArrayList castVoteList=new ArrayList();
+     
+     boolean isBallotCreated=false;
    
      String adminUserName;
      String adminPassword;
@@ -25,13 +36,74 @@ public class Voteapplication
         
          System.out.println(adminUserName+"-"+adminPassword);
         
-        if(admin.validateAdminLogin(adminUserName, adminPassword)==true)
-          {
-            System.out.println("Login Success");
-            voterInstance=createVoter();
-            voterList.add(voterInstance);
-            System.out.println(voterInstance.showVoterDetails());
-            System.out.println(voterList.size());
+          if(admin.validateAdminLogin(adminUserName, adminPassword)==true)
+           {
+             System.out.println("Login Success");
+             
+             //Voter Registration
+             voterInstance1=createVoter();
+             voterList.add(voterInstance1);
+             voterInstance2=createVoter();
+             voterList.add(voterInstance2);
+             voterInstance3=createVoter();
+             voterList.add(voterInstance3);
+             
+             
+             //Candidate Registration
+             candidateInstance1=createCandidate();
+             candidateList.add(candidateInstance1);
+             candidateInstance2=createCandidate();
+             candidateList.add(candidateInstance2);
+
+             //Create ballot
+             ballotForVoting=createBallot(candidateList);
+             
+             
+            
+             System.out.println(voterList.size());
+             System.out.println("Please enter voter id to validate:");
+             int voterId;
+             int candidateId;
+             voterId=Integer.parseInt(in.readLine());
+             if (validateVoterid(voterList,voterId))
+             {
+                 System.out.println("Voter exists");
+                 
+                //Show Ballot for Voting
+                ArrayList<Candidate> candidateListInBallot=ballotForVoting.getCandidates();
+                for(int i=0;i<candidateListInBallot.size();i++)
+                     System.out.println(candidateListInBallot.get(i).showCandidateDetails());
+                
+                //Accept the Candidate ID
+                System.out.println("Enter the candidate id");
+                candidateId=Integer.parseInt(in.readLine());
+                // Validate the Candiate ID
+                if (validateCandidateid(candidateList,candidateId))
+                  {
+                    System.out.println("Candidate id exists");
+                  
+                // If Candidate exists, get CandidateOBject from ballotForVoting
+                   ballotForVoting=candidateInstance1.get
+                  
+                  }
+                else
+                {
+                    System.out.println("candidate id does not exists");
+                }    
+             
+             }  
+             else
+             {
+                    System.out.println("Voter Does not exists");
+             }
+            
+                    
+         
+             
+//             candidateInstance=createCandidate();
+//             candidateList.add(candidateInstance);
+//             System.out.println(candidateInstance.showCandidateDetails());
+//             System.out.println(candidateList.size());
             
             /*
             1. Voter Registration
@@ -42,14 +114,14 @@ public class Voteapplication
             6. Exit
             */
         
-          }
-        else
-            System.out.println("Login Failure");
-    }
-    catch (Exception e)
-      {
-        System.out.println(e);
-      }                              
+            }
+          else
+             System.out.println("Login Failure");
+        }
+      catch (Exception e)
+        {
+          System.out.println(e);
+        }                              
    }
    /* Method to create voter*/
    public static VoterRole createVoter()
@@ -108,19 +180,19 @@ public class Voteapplication
             {
               System.out.println("Please provide your details");
            
-              System.out.println("Enter your name:");
+              System.out.println("Enter candidate name:");
               candidateFirstName=in.readLine();
            
-              System.out.println("Enter your candidate id:");
+              System.out.println("Enter candidate id:");
               candidateId=Integer.parseInt(in.readLine());
            
-              System.out.println("Enter your party name:");
+              System.out.println("Enter party name:");
               candidateParty=in.readLine();
            
-              System.out.println("Enter your age:");
+              System.out.println("Enter the age:");
               age=Integer.parseInt(in.readLine());
            
-              System.out.println("Enter your city:");
+              System.out.println("Enter the city:");
               city=in.readLine();
            
              candidateInstance.candidateDetails(candidateFirstName,candidateParty,city,candidateId,age);           
@@ -131,70 +203,31 @@ public class Voteapplication
            }
       return candidateInstance;
     }
+
    /* Method to create Ballot*/
-  public static Ballot createBallot()
+  public static Ballot createBallot(ArrayList<Candidate> candidateList)
     {
-          
+      //Ballot BallotInstance=new Ballot();    
+        Ballot ballot=new Ballot();
+        ballot.createBallot(candidateList);
+        return ballot;
     }
-  public static Ballot checkBallotcreationInDatabase(int voterId)
+  public static void checkBallotcreationInDatabase(int voterId)
     {
-       if(Ballot.createBallot()==true)
-         {
-           return true;  
-           System.out.println("Ballot creation is completed");
-           DataInputStream in=new DataInputStream(System.in);
-           try
-             {
-               System.out.println("Enter voterId");
-               voterId=Integer.parseInt(in.readLine());
-             }
-           catch(Exception e)
-             {
-               System.out.println(e);
-             }
-          
-       if(voterList.contains(voterId))
-          {
-           System.out.println("voter id is valid and exists in voter list");
-           castVoteInstance=createCastVote();
-           candiateList.add(candidateInstance);
-          // System.out.println(candidateInstance.showCandidateDetails());
-           //System.out.println(candidateList.size());
-           Candidate candidateInstance=new Candidate();
-           VoterRole voterInstance=new CastVote();
-            
-          }  
-        }
+      
+    }
        
         
-   public boolean validatevoterid(int voterId,int id)
+   public static boolean validateVoterid(ArrayList<VoterRole> voterList,int voterId)
     {
-       if(voterId==id)
-           return true;
-            return false;   
+        for(int i=0;i<voterList.size();i++)
+            if(voterList.get(i).checkVotersInDatabase(voterId))
+                return true;
+        return false;   
     }
-   public Ballot displayCandidateList(int candidateId,int index)
-    {
-       for(index=0;index<candidateList.size();index++)
-          {
-            System.out.println(candidateList.get(index));
-          }
-           System.out.println("Select the candidate");
-           DataInputStream in=new DataInputStream(System.in);
-           try
-             {
-                System.out.println("Enter candidateId");
-                candidateId=Integer.parseInt(in.readLine());
-             }
-           catch(Exception e)
-              {
-                System.out.println(e);
-              }
-            
-    }
-               
+                  
 }
-}
+
 
      
                

@@ -11,35 +11,44 @@ package voteapplication;
  * @datecreated 27-Jul-2019
  */
 
-/*
-Class definition to accept Voter profile details
-*/
+/* Class definition to accept Voter profile details */
 
-public class VoterRole {
-    private int voterId; 
-    private String voterFname;
-    private String voterLname;
-    private String voterLocation;
-    private int voterAge;
+public class VoterRole 
+{
+  private int voterId; 
+  private int voterAadharNo; 
+  private String voterFname;
+  private String voterLname;
+  private String voterLocation;
+  private int voterAge;
+  private boolean voted;
     
-    /*
-    Method to register voter into database
-    */
-    public void registerVoterDetails(int id, String fname, String lname, String location, int age)
+  /* Method to register voter into database */
+  public void voterRegistration(int id, String fname, String lname, String location, int age,int aadharNo)
     {
-        voterId=id;
-        voterFname=fname;
-        voterLname=lname;
-        voterLocation=location;
-        voterAge=age;
+      voterId=id;
+      voterFname=fname;
+      voterLname=lname;
+      voterLocation=location;
+      voterAge=age;
+      voterAadharNo=aadharNo;
     }
-    
-    /*
-    Method to retrieve voter profile details
-    format of retrival: ID | FNAME | LNAME | LOCATION | AGE
-    */
-    public String showVoterDetails()
+  /* Method to check whether voter exists in database or not */
+  public boolean checkVotersInDatabase(int voterId)
     {
-        return voterId +"|"+ voterFname +"|"+ voterLname +"|"+ voterLocation +"|"+ voterAge;
+      if(this.voterId==voterId)
+         return true;
+         return false;
+    }     
+ /* Method to retrieve voter profile details
+   format of retrival: ID | AADHARNO | FNAME | LNAME | LOCATION | AGE */
+   public String showVoterDetails()
+    {
+      return voterId +"|"+ voterAadharNo+"|"+ voterFname +"|"+ voterLname +"|"+ voterLocation +"|"+ voterAge;
     }
+   
+   public boolean checkIfVoteIsDone()
+   {
+       return voted;
+   }
 }
