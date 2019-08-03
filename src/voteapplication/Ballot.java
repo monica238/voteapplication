@@ -16,7 +16,7 @@ public class Ballot
     }
     
   /*Method to get candidate object*/  
-   public Candidate getcandidate(int candidateId)
+   public Candidate getCandidate(int candidateId)
     {
         Candidate noOne=new Candidate();
         noOne.candidateDetails("NONE", "NONE", "NONE", 0, 0);
