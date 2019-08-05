@@ -7,18 +7,9 @@ public class Voteapplication
  {   
    public static void main(String[] args) 
    {
-     AdminRole admin=new AdminRole();
+     AdminRole admin=new AdminRole();                                       
      
-     VoterRole voterInstance1;
-     VoterRole voterInstance2;
-     VoterRole voterInstance3;
-     
-     Candidate candidateInstance1;
-     Candidate candidateInstance2;     
-     CastVote castVoteInstance=new CastVote();
-     
-     Ballot ballotForVoting;
-     
+     Ballot ballotForVoting=null;
      ArrayList voterList=new ArrayList();
      ArrayList candidateList=new ArrayList();
      ArrayList castVoteList=new ArrayList();
@@ -27,107 +18,77 @@ public class Voteapplication
    
      String adminUserName;
      String adminPassword;
-     System.out.println("Enter Username and Password for Admin:");
+     
+     int optionForRole=0;
+     
+     System.out.println("Please sleect your role:\n1. Administrator\n2. Voter");
       try
-       {
+       {         
          DataInputStream in=new DataInputStream(System.in);
-         adminUserName=in.readLine();
-         adminPassword=in.readLine();
+         optionForRole=Integer.parseInt(in.readLine());         
+       }
+      catch(Exception e)
+      {
+          System.out.println(e);
+      }
+     if(optionForRole==1)
+     {
+        int optionForOperation;    
+        System.out.println("Enter Username and Password for Admin:");
+        try
+        {
+            DataInputStream in=new DataInputStream(System.in);
+            adminUserName=in.readLine();
+            adminPassword=in.readLine();
         
-         System.out.println(adminUserName+"-"+adminPassword);
+            System.out.println(adminUserName+"-"+adminPassword);
         
-          if(admin.validateAdminLogin(adminUserName, adminPassword)==true)
-           {
-             System.out.println("Login Success");
+            if(admin.validateAdminLogin(adminUserName, adminPassword)==true)
+            {
+                System.out.println("Login Success");
              
-             /* Voter Registration */
-             voterInstance1=createVoter();
-             voterList.add(voterInstance1);
-             voterInstance2=createVoter();
-             voterList.add(voterInstance2);
-             voterInstance3=createVoter();
-             voterList.add(voterInstance3);
+                // Iterative process for Voter Registration, Candidate Rwegistration, Ballot creation and Results
+                do
+                {
              
+                    System.out.println("Please select the chice of operation:\n1. Voter Registraion\n2. Candidate Nomination\n3. Ballot creation\n4. Results\n5. Exit\n");
+                    optionForOperation=Integer.parseInt(in.readLine());
              
-             /* Candidate Registration */
-             candidateInstance1=createCandidate();
-             candidateList.add(candidateInstance1);
-             candidateInstance2=createCandidate();
-             candidateList.add(candidateInstance2);
-
-             /* Create ballot */
-             ballotForVoting=createBallot(candidateList);
-             
-             
-             /* To evaluate whether the voter id is valid or not */
-             int voterId;
-             int candidateId;
-             System.out.println(voterList.size());
-             System.out.println("Please enter voter id to validate:");
-             voterId=Integer.parseInt(in.readLine());
-             
-             
-             if (validateVoterid(voterList,voterId))
-             {
-                 System.out.println("Voter exists");
-                 
-                /* Show Ballot for Voting */
-                ArrayList<Candidate> candidateListInBallot=ballotForVoting.getCandidates();
-                for(int i=0;i<candidateListInBallot.size();i++)
-                     System.out.println(candidateListInBallot.get(i).showCandidateDetails());
-                
-                /* Accept the Candidate ID */
-                System.out.println("Enter the candidate id");
-                candidateId=Integer.parseInt(in.readLine());
-                
-                /* Validate the Candiate ID */
-                if (validateCandidateId(candidateList,candidateId))
-                  {
-                    System.out.println("Candidate id exists");
-                    
-                /* If Candidate exists, get CandidateOBject from ballotForVoting */
-                    candidateInstance1=ballotForVoting.getCandidate(candidateId);
-                    
-                    /* Get Voter  Instance from the registration database */
-                    voterInstance1=getVoterInstanceById(voterList,voterId);
-                    
-                   
-                    /* If voting is done add the cast vote to the cast vote list */
-                    castVoteInstance=new CastVote();
-                    
-                    castVoteInstance.setCandidateInstance(candidateInstance1);
-                    castVoteInstance.setVoterInstance(voterInstance1);
-                                        
-                    castVoteList.add(castVoteInstance);
-                    System.out.println("Voting process is completed..Thank You");
-                  }
-                
-                /* If the candidate id selected by voter is not correct */
-                else
+                    if(optionForOperation==1)
+                    {
+                        /* Voter Registration */
+                        VoterRole voterInstance;
+                        voterInstance=createVoter();
+                        voterList.add(voterInstance);                
+                    }
+                    else if(optionForOperation==2)
+                    {
+                        /* Candidate Registration */
+                        Candidate candidateInstance;
+                        candidateInstance=createCandidate();
+                        candidateList.add(candidateInstance);                    
+                    }
+                    else if(optionForOperation==3)
+                    {
+                        /* Create ballot */                        
+                        ballotForVoting=createBallot(candidateList);
+                        isBallotCreated=true;
+                    }
+                    else if(optionForOperation==4)
+                    {
+                        //RESULTS
+                        System.out.println(castVoteList.size());                                            
+                    }
+                    else if(optionForOperation==5)
+                    {
+                        return;
+                     }
+                 else
                  {
-                    System.out.println("candidate id does not exists");
-                 }    
-             
-             } 
-             
-            /* If the given voter id does not exists in the database */
-            else
-             {
-               System.out.println("Voter Does not exists");
+                     System.out.println("Invalid choice");
+                 }
              }
-            
-                   
-         
-             
-            /*
-            1. Voter Registration
-            2. Candidate Registration
-            3. Ballot creation
-            4. Voting
-            5. Results
-            6. Exit
-            */
-        
+             while(true);
            }
           
           /* If the given user name and password is incorrect */
@@ -137,8 +98,84 @@ public class Voteapplication
      catch (Exception e)
        {
          System.out.println(e);
-       }                              
-   }
+       }        
+     }
+     else if(optionForRole==2)
+     {
+         //Voter Role
+           /* To evaluate whether the voter id is valid or not */
+                    int voterId;
+                    int candidateId;
+                    System.out.println(voterList.size());
+                    System.out.println("Please enter voter id to validate:");
+                    DataInputStream in=new DataInputStream(System.in);
+                    try
+                    {
+                    voterId=Integer.parseInt(in.readLine());
+
+
+                    if (validateVoterid(voterList,voterId))
+                    {
+                        System.out.println("Voter exists");
+
+                       /* Show Ballot for Voting */
+                       ArrayList<Candidate> candidateListInBallot=ballotForVoting.getCandidates();
+                       for(int i=0;i<candidateListInBallot.size();i++)
+                            System.out.println(candidateListInBallot.get(i).showCandidateDetails());
+
+                       /* Accept the Candidate ID */
+                       System.out.println("Enter the candidate id");
+                       candidateId=Integer.parseInt(in.readLine());
+
+                       /* Validate the Candiate ID */
+                       if (validateCandidateId(candidateList,candidateId))
+                         {
+                           System.out.println("Candidate id exists");
+
+                       /* If Candidate exists, get CandidateOBject from ballotForVoting */
+                           Candidate candidateInstance;
+                           candidateInstance=ballotForVoting.getCandidate(candidateId);
+
+                           /* Get Voter  Instance from the registration database */
+                           VoterRole voterInstance;
+                           voterInstance=getVoterInstanceById(voterList,voterId);
+
+
+                           /* If voting is done add the cast vote to the cast vote list */
+                           CastVote castVoteInstance;
+                           castVoteInstance=new CastVote();
+
+                           castVoteInstance.setCandidateInstance(candidateInstance);
+                           castVoteInstance.setVoterInstance(voterInstance);
+
+                           castVoteList.add(castVoteInstance);
+                           System.out.println("Voting process is completed..Thank You");
+                         }
+
+                       /* If the candidate id selected by voter is not correct */
+                       else
+                        {
+                           System.out.println("candidate id does not exists");
+                        }
+                           } 
+
+                   /* If the given voter id does not exists in the database */
+                   else
+                    {
+                      System.out.println("Voter Does not exists");
+                    }
+                    }
+                    catch(Exception e)
+                    {
+                        System.out.println(e);
+                    }
+     }     
+     else
+     {
+         System.out.println("Invalid Choice");
+     }
+     }
+      
 
    /* Method to create voter*/
    public static VoterRole createVoter()
