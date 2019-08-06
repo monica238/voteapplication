@@ -20,8 +20,9 @@ public class Voteapplication
      String adminPassword;
      
      int optionForRole=0;
-     
-     System.out.println("Please sleect your role:\n1. Administrator\n2. Voter");
+     do
+     {    
+      System.out.println("Please sleect your role:\n1. Administrator\n2. Voter\n3. Exit");
       try
        {         
          DataInputStream in=new DataInputStream(System.in);
@@ -33,7 +34,8 @@ public class Voteapplication
       }
      if(optionForRole==1)
      {
-        int optionForOperation;    
+        int optionForOperation;
+        System.out.println("ADMINISTRATOR LOGIN MODULE");
         System.out.println("Enter Username and Password for Admin:");
         try
         {
@@ -51,7 +53,7 @@ public class Voteapplication
                 do
                 {
              
-                    System.out.println("Please select the chice of operation:\n1. Voter Registraion\n2. Candidate Nomination\n3. Ballot creation\n4. Results\n5. Exit\n");
+                    System.out.println("Please select the choice of operation:\n1. Voter Registraion\n2. Candidate Nomination\n3. Ballot creation\n4. Results\n5. Exit\n");
                     optionForOperation=Integer.parseInt(in.readLine());
              
                     if(optionForOperation==1)
@@ -169,12 +171,18 @@ public class Voteapplication
                     {
                         System.out.println(e);
                     }
-     }     
-     else
-     {
-         System.out.println("Invalid Choice");
+            } 
+           else if(optionForRole==3)
+              {
+                return;
+              }
+           else
+            {
+              System.out.println("Invalid Choice");
+            }
      }
-     }
+   while(true);
+ }
       
 
    /* Method to create voter*/
@@ -192,6 +200,7 @@ public class Voteapplication
         DataInputStream in=new DataInputStream(System.in);
           try
             {
+              System.out.println("VOTER REGISTRATION MODULE");
               System.out.println("Please provide your details");
 
               System.out.println("Enter your first name:");
@@ -236,7 +245,8 @@ public class Voteapplication
          DataInputStream in=new DataInputStream(System.in);
           try
             {
-              System.out.println("Please provide your details");
+              System.out.println("NOMINATION OF CANDIDATES");
+              System.out.println("Please provide candidate details");
            
               System.out.println("Enter candidate name:");
               candidateFirstName=in.readLine();
