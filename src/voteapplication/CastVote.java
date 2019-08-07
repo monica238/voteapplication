@@ -6,7 +6,7 @@ package voteapplication;
 /* Class definition to cast the vote from voter*/
 public class CastVote 
 {
-  private VoterRole voterInstance;
+  private Voter voterInstance;
   private Candidate candidateInstance;
   
   /* Method to accept candidate Id*/
@@ -16,12 +16,12 @@ public class CastVote
    }
   
   /*Method to accept voter Id*/
-  public VoterRole getVoterInstance()
+  public Voter getVoterInstance()
    {
      return voterInstance;
    }
   
-  public void setVoterInstance(VoterRole voterInstance)
+  public void setVoterInstance(Voter voterInstance)
   {
       this.voterInstance=voterInstance;
   }

@@ -4,11 +4,11 @@ package voteapplication;
  *@datecreated 27-Jul-2019
  */
 /* Class definition to access admin login*/
-public class AdminRole {
+public class Admin {
     private String adminUserName;
     private String adminPassword;
     
-    AdminRole()
+    Admin()
     {
         adminUserName="admin";
         adminPassword="password";

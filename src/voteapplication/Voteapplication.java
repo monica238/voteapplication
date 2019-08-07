@@ -7,7 +7,7 @@ public class Voteapplication
  {   
    public static void main(String[] args) 
    {
-     AdminRole admin=new AdminRole();                                       
+     Admin admin=new Admin();                                       
      
      Ballot ballotForVoting=null;
      ArrayList voterList=new ArrayList();
@@ -59,7 +59,7 @@ public class Voteapplication
                     if(optionForOperation==1)
                     {
                         /* Voter Registration */
-                        VoterRole voterInstance;
+                        Voter voterInstance;
                         voterInstance=createVoter();
                         voterList.add(voterInstance);                
                     }
@@ -139,7 +139,7 @@ public class Voteapplication
                            candidateInstance=ballotForVoting.getCandidate(candidateId);
 
                            /* Get Voter  Instance from the registration database */
-                           VoterRole voterInstance;
+                           Voter voterInstance;
                            voterInstance=getVoterInstanceById(voterList,voterId);
 
 
@@ -186,9 +186,9 @@ public class Voteapplication
       
 
    /* Method to create voter*/
-   public static VoterRole createVoter()
+   public static Voter createVoter()
     {                               
-      VoterRole voterInstance=new VoterRole();     /* Object created for voter role class */
+      Voter voterInstance=new Voter();     /* Object created for voter role class */
       String voterFname;
       String voterLname;
       int voterId; 
@@ -286,7 +286,7 @@ public class Voteapplication
     }
        
    /* Method to validate whether voter id exists in the voter list or not */     
-   public static boolean validateVoterid(ArrayList<VoterRole> voterList,int voterId)
+   public static boolean validateVoterid(ArrayList<Voter> voterList,int voterId)
     {
         for(int i=0;i<voterList.size();i++)
             if(voterList.get(i).checkVotersInDatabase(voterId))      /* check for the voter id in the database */
@@ -303,9 +303,9 @@ public class Voteapplication
         return false;   
     }
    /* Method to get the voter instance by voter id */
-      public static VoterRole getVoterInstanceById(ArrayList<VoterRole> voterList,int voterId)
+      public static Voter getVoterInstanceById(ArrayList<Voter> voterList,int voterId)
       {
-        VoterRole noOne=new VoterRole();
+        Voter noOne=new Voter();
         noOne.voterRegistration(0,"NONE", "NONE", "NONE", 0, 0);
           for(int i=0;i<voterList.size();i++)
           {

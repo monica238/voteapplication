@@ -1,17 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package voteapplication;
 
 /**
  *
- * @author USER1
+ * @author KING
  */
-public class VoterDbo 
+public class CandidateDbo 
 {
-     Voter connection;//DB Connection Object declaration
+    Candidate connection;//DB Connection Object declaration
     
     
     public boolean connectToDB()
@@ -48,49 +43,51 @@ public class VoterDbo
       conn=connectToDB.getConnection(db_url,USER,PASS);
     // CRUD Operation
     
-    public boolean createVoter(Voter voterInstance)
+    public boolean createCandidate(Candidate candidateInstance)
     {
         
         /* 2. Execure SQL Statement for Insert */
-       INSERT INTO Voter(voterid,voterFname,voterLname,voterAge,voterLocation,voterAadharno);
-       INSERT INTO Voter values(1001,damini,mv,23,mysore,234567891)
+       INSERT INTO Candidate(candidateId,candidateFirstname,age,city,candidateParty);
+       INSERT INTO Candidate values(1001,damini,mv,23,mysore,234567891)
         /*3. Rerurn Success or Failure*/
     }
     
-    public Voter getVoterObject(int voterId)
+    public Voter getCandidateObject(int voterId)
     {
         
         /* 2. Execure SQL Statement for Select */
-        SELECT * FROM Voter;
+        SELECT * FROM Candidate;
         
-       /* 3. Create VoterObject and Assign DB values to it */
-        Voter voterobj=new voterobj();
-        voterobj=
-        /* 4. Rerurn Voter Object */
-        return voterobj;
+       /* 3. Create CandidateObject and Assign DB values to it */
+        Candidate candidateobj=new candidateobj();
+        candidateobj=
+        /* 4. Rerurn candidate Object */
+        return candidateobj;
         
     }
     
-    public boolean updateVoter(int voterId,Voter voterInstance)
+    public boolean updateCandidate(int candidateId,Candidate candidateInstance)
     {
         /*
         1. connectToDB()
         3. Execure SQL Statement for Select
-        4. Check if Voter ID is valid
+        4. Check if candidate ID is valid
         5. If Valid, Execure SQL Statement Update
         6. Return Success/Failure
         */
     }
     
-    public boolean deleteVoter(int voterId)
+    public boolean deleteCandidate(int candidateId)
     {
         /*
         1. connectToDB()
         3. Execure SQL Statement for Select
-        4. Check if Voter ID is valid
+        4. Check if candidate ID is valid
         5. If Valid, Execure SQL Statement Delete
         6. Return Success/Failure
         */        
     }
     
+}
+
 }
