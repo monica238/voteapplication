@@ -222,6 +222,8 @@ public class Voteapplication
               voterLocation=in.readLine();
 
               voterInstance.voterRegistration(voterId,voterFname , voterLname ,voterLocation, voterAge , voterAadharNo);           
+              VoterDbo vdbo=new VoterDbo();
+              vdbo.createVoter(voterInstance);
             }
           catch (Exception e)
             {
