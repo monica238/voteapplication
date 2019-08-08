@@ -18,6 +18,14 @@ public class Voteapplication
    
      String adminUserName;
      String adminPassword;
+
+//                             Voter voterInstance2=new Voter();
+//                        //voterInstance=createVoter();
+//                        //voterList.add(voterInstance);   
+//                        VoterDbo voterDBObject1=new VoterDbo();
+//                        voterDBObject1.connectToDB();
+//                        voterDBObject1.createVoter(voterInstance2);
+//     
      
      int optionForRole=0;
      do
@@ -59,9 +67,18 @@ public class Voteapplication
                     if(optionForOperation==1)
                     {
                         /* Voter Registration */
-                        Voter voterInstance;
-                        voterInstance=createVoter();
-                        voterList.add(voterInstance);                
+                        Voter voterInstance=new Voter();
+                        //voterInstance=createVoter();
+                        //voterList.add(voterInstance);   
+                        VoterDbo voterDBObject=new VoterDbo();
+                        if(voterDBObject.createVoter(voterInstance))
+                        {
+                            System.out.println("Voter details stored successfully");
+                        }
+                        else
+                        {
+                            System.out.println("Error in insert query");
+                        }
                     }
                     else if(optionForOperation==2)
                     {
@@ -222,8 +239,7 @@ public class Voteapplication
               voterLocation=in.readLine();
 
               voterInstance.voterRegistration(voterId,voterFname , voterLname ,voterLocation, voterAge , voterAadharNo);           
-              VoterDbo vdbo=new VoterDbo();
-              vdbo.createVoter(voterInstance);
+              
             }
           catch (Exception e)
             {
