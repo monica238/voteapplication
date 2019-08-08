@@ -1,5 +1,10 @@
 package voteapplication;
 
+import java.sql.Connection;
+import java.sql.*;
+import org.apache.log4j.*;
+import static voteapplication.Voteapplication.validateCandidateid;
+
 /**
  *
  * @author KING
@@ -7,48 +12,60 @@ package voteapplication;
 public class CandidateDbo 
 {
     Candidate connection;//DB Connection Object declaration
+     Connection conn=null;
     
+     
     
     public boolean connectToDB()
     {
-        // Create DB Connection
+         // Create DB Connection
         /* JDBC driver name and database url */
-       static final String jdbc_driver="com.mysql.jdbc.driver";
-       static final String db_url="jdbc:mysql://localhost";
+    final String jdbc_driver="com.mysql.jdbc.driver";
+    final String db_url="jdc:mysql://localhost";
     
   /* Database credentials */
-     static final String USER= "username";
-     static final String PASS= "password"; 
-        // Check if connection is successful
-     Connection conn=null;
-     Statement stmt=null;
+     final String USER= "username";
+     final String PASS= "password"; 
+        // Check if connection is successful     
      try
       {
         /*Register JDBC driver*/
         Class.forName("com.mysql.jdbc.Driver");
         
         /* Open a connection */
-    System.out.println("Connecting to database");
-    conn=connectToDB.getConnection(db_url,USER,PASS);
+        System.out.println("Connecting to database");        
+        conn=DriverManager.getConnection(db_url,USER,PASS);
+        applog.info("DB connection successful!");
+        return true;
       }
-      // Return Success or Failure
-      return true;
+      // Return Success or Failure      
       catch(Exception e)
       {
-          
+          applog.error(e);
+          return false;
       }
-    
-    /* 1. connectToDB() */
-        System.out.println("Connecting to database");
-      conn=connectToDB.getConnection(db_url,USER,PASS);
-    // CRUD Operation
+    }
+     
     
     public boolean createCandidate(Candidate candidateInstance)
     {
+        String SQLStatement;
+       Statement InsertStatement=null;
+        
         
         /* 2. Execure SQL Statement for Insert */
-       INSERT INTO Candidate(candidateId,candidateFirstname,age,city,candidateParty);
-       INSERT INTO Candidate values(1001,damini,mv,23,mysore,234567891)
+       try
+       {                  
+       SQLStatement ="INSERT INTO Candidate(candidateId,candidateFirstname,age,city,candidateParty)values(1001,damini,mv,23,mysore,234567891)";
+       InsertStatement=conn.prepareStatement(SQLStatement);
+       conn.commit();       
+       return true;
+       }
+       catch(Exception e)
+       {
+         return false;  
+       }
+       
         /*3. Rerurn Success or Failure*/
     }
     

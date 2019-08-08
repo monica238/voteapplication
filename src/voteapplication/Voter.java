@@ -56,4 +56,50 @@ public class Voter
    {
        return voterId;
    }
+   public void setVoterFname(String voterFname)
+   {
+       this.voterFname=voterFname;
+   }
+   
+   public String getVoterFname()
+   {
+       return voterFname;
+   }
+   public void setVoterLname(String voterLname)
+   {
+       this.voterLname=voterLname;
+   }
+   
+   public String getVoterLname()
+   {
+       return voterLname;
+   }
+   public void setVoterLocation(String voterLocation)
+   {
+       this.voterLocation=voterLocation;
+   }
+   
+   public String getVoterLocation()
+   {
+       return voterLocation;
+   }
+   public void setVoterAge(int voterAge)
+   {
+       this.voterAge=voterAge;
+   }
+   
+   public int getVoterAge()
+   {
+       return voterAge;
+   }
+   public void setVoterAadharNo(int voterAadharNo)
+   {
+       this.voterAadharNo=voterAadharNo;
+   }
+   
+   public int getVoterAadharNo()
+   {
+       return voterAadharNo;
+   }
+   
 }
