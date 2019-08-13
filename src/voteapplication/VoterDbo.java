@@ -72,123 +72,123 @@ public class VoterDbo
     public Voter getVoterObject(int voterId)
     {
         
-//        /* 2. Execure SQL Statement for Select */
-//       String SQLStatement;
-//       Statement SelectStatement=null;
-//        
-//        /* 2. Execure SQL Statement for Insert */
-//       try
-//       {                  
-//       SQLStatement="SELECT * FROM vOTER WHERE VOTERiD="+voterId;
-//       SelectStatement=conn.prepareStatement(SQLStatement);
-//       conn.commit();       
-//       ResultSet rs=SelectStatement.getResultSet();
-//       Voter voterInstance=new Voter();
-//       voterInstance.setVoterId(rs(0));
-//       return voterInstance;
-//       }
-//       catch(Exception e)
-//       {
-//         return false;  
-//       }
-//        /*3. Rerurn Success or Failure*/
+        /* 2. Execure SQL Statement for Select */
+       String SQLStatement;
+       Statement SelectStatement=null;
+        
+        /* 2. Execure SQL Statement for Insert */
+       try
+       {                  
+       SQLStatement="SELECT * FROM vOTER WHERE VOTERiD="+voterId;
+       SelectStatement=conn.prepareStatement(SQLStatement);
+       conn.commit();       
+       ResultSet rs=SelectStatement.getResultSet();
+       Voter voterInstance=new Voter();
+       voterInstance.setVoterId(rs(0));
+       return voterInstance;
+       }
+       catch(Exception e)
+       {
+         return false;  
+       }
+        /*3. Rerurn Success or Failure*/
        return null; 
     }
     
     public boolean updateVoter(int voterId,Voter voterInstance)
     {
-//        /* 1. connectToDB()*/
-//        
-//        /* 2. Execure SQL Statement for Select */
-//        String SQLStatement;
-//       Statement SelectStatement=null;
-//       try
-//       {                  
-//       SQLStatement="SELECT * FROM vOTER WHERE VOTERiD="+voterId;
-//       SelectStatement=conn.prepareStatement(SQLStatement);
-//       conn.commit();       
-//       ResultSet rs=SelectStatement.getResultSet();
-//       return true;
-//       }
-//       catch(Exception e)
-//       {
-//         return false;  
-//       }
-//        /*3. Rerurn Success or Failure*/
-//        
-//    
-//     /* 3. Check if Voter ID is valid */
-//       if (validateVoterid(voterList,voterId))
-//         {
-//           System.out.println("Voter exists");
-//           /* 4. If Valid, Execure SQL Statement Update */
-//           try
-//            {                  
-//              SQLStatement="UPDATE VOTER SET VOTERiD=value"+voterId;
-//              SelectStatement=conn.prepareStatement(SQLStatement);
-//              conn.commit();       
-//              ResultSet rs=SelectStatement.getResultSet();
-//              return true;
-//            }
-//           catch(Exception e)
-//            {
-//               return false;  
-//            }
-//         }
-//       else
-//       {
-//           System.out.println("voter does not exist");
-//       
-//        return false;
-//       }
-//        /* 5. Return Success/Failure */
+        /* 1. connectToDB()*/
+        
+        /* 2. Execure SQL Statement for Select */
+        String SQLStatement;
+       Statement SelectStatement=null;
+       try
+       {                  
+       SQLStatement="SELECT * FROM vOTER WHERE VOTERiD="+voterId;
+       SelectStatement=conn.prepareStatement(SQLStatement);
+       conn.commit();       
+       ResultSet rs=SelectStatement.getResultSet();
+       return true;
+       }
+       catch(Exception e)
+       {
+         return false;  
+       }
+        /*3. Rerurn Success or Failure*/
+        
+    
+     /* 3. Check if Voter ID is valid */
+       if (validateVoterid(voterList,voterId))
+         {
+           System.out.println("Voter exists");
+           /* 4. If Valid, Execure SQL Statement Update */
+           try
+            {                  
+              SQLStatement="UPDATE VOTER SET VOTERiD=value"+voterId;
+              SelectStatement=conn.prepareStatement(SQLStatement);
+              conn.commit();       
+              ResultSet rs=SelectStatement.getResultSet();
+              return true;
+            }
+           catch(Exception e)
+            {
+               return false;  
+            }
+         }
+       else
+       {
+           System.out.println("voter does not exist");
+       
+        return false;
+       }
+        /* 5. Return Success/Failure */
         return true;
     }    
     
     
     public boolean deleteVoter(int voterId)
     {
-//        /*3. Execure SQL Statement for Select*/
-//           String SQLStatement;
-//       Statement SelectStatement=null;
-//       try
-//       {                  
-//       SQLStatement="SELECT * FROM vOTER WHERE VOTERiD="+voterId;
-//       SelectStatement=conn.prepareStatement(SQLStatement);
-//       conn.commit();       
-//       ResultSet rs=SelectStatement.getResultSet();
-//       return true;
-//       }
-//       catch(Exception e)
-//       {
-//         return false;  
-//       }
-//       /* 4. Check if Voter ID is valid*/
-//      if (validateVoterid(voterList,voterId))
-//         {
-//           System.out.println("Voter exists");
-//           
-//       /* 5. If Valid, Execure SQL Statement Delete*/
-//             String SQLStatement;
-//       Statement SelectStatement=null;
-//       try
-//       {                  
-//       SQLStatement="DELETE  FROM VOTER WHERE VOTERiD="+voterId;
-//       SelectStatement=conn.prepareStatement(SQLStatement);
-//       conn.commit();       
-//       ResultSet rs=SelectStatement.getResultSet();
-//       return true;
-//       }
-//       catch(Exception e)
-//       {
-//         return false;  
-//       }
-//         }
-//      else
-//      {
-//          return false;
-//      }
-//      /*  6. Return Success/Failure*/
+        /*3. Execure SQL Statement for Select*/
+           String SQLStatement;
+       Statement SelectStatement=null;
+       try
+       {                  
+       SQLStatement="SELECT * FROM vOTER WHERE VOTERiD="+voterId;
+       SelectStatement=conn.prepareStatement(SQLStatement);
+       conn.commit();       
+       ResultSet rs=SelectStatement.getResultSet();
+       return true;
+       }
+       catch(Exception e)
+       {
+         return false;  
+       }
+       /* 4. Check if Voter ID is valid*/
+      if (validateVoterid(voterList,voterId))
+         {
+           System.out.println("Voter exists");
+           
+       /* 5. If Valid, Execure SQL Statement Delete*/
+             String SQLStatement;
+       Statement SelectStatement=null;
+       try
+       {                  
+       SQLStatement="DELETE  FROM VOTER WHERE VOTERiD="+voterId;
+       SelectStatement=conn.prepareStatement(SQLStatement);
+       conn.commit();       
+       ResultSet rs=SelectStatement.getResultSet();
+       return true;
+       }
+       catch(Exception e)
+       {
+         return false;  
+       }
+         }
+      else
+      {
+          return false;
+      }
+      /*  6. Return Success/Failure*/
      return true;           
     }
     

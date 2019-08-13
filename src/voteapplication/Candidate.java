@@ -36,6 +36,50 @@ public class Candidate
      {
         return candidateId +"|"+ candidateFirstName +"|"+ candidateParty +"|"+ city +"|"+ age;
      }
+   public void setCandidateId(int candidateId)
+   {
+       this.candidateId=candidateId;
+   }
+   
+   public int getCandidateId()
+   {
+       return candidateId;
+   }
+   public void setCandidateFirstName(String candidateFirstName)
+   {
+       this.candidateFirstName=candidateFirstName;
+   }
+   
+   public String getCandidateFirstName()
+   {
+       return candidateFirstName;
+   }
+   public void setCandidateParty(String candidateParty)
+   {
+       this.candidateParty=candidateParty;
+   }
+   
+   public String getCandidateParty()
+   {
+       return candidateParty;
+   }
+   public void setCity(String city)
+   {
+       this.city=city;
+   }
+   public String getCity()
+   {
+       return city;
+   }
+   public void setAge(int age)
+   {
+       this.age=age;
+   }
+   
+   public int getage()
+   {
+       return age;
+   }
 
 }
 
