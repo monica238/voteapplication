@@ -41,7 +41,7 @@ createddate date
 
 
 /* Ballot and Candidate */
-create table Ballot
+create table Ballot_Candidates
 (
 ballotId int,
 candidateId int
