@@ -19,13 +19,13 @@ public class Voteapplication
      String adminUserName;
      String adminPassword;
 
-//                             Voter voterInstance2=new Voter();
-//                        //voterInstance=createVoter();
-//                        //voterList.add(voterInstance);   
-//                        VoterDbo voterDBObject1=new VoterDbo();
-//                        voterDBObject1.connectToDB();
-//                        voterDBObject1.createVoter(voterInstance2);
-//     
+                            Voter voterInstance2=new Voter();
+                        voterInstance=createVoter();
+                       voterList.add(voterInstance);   
+                       VoterDbo voterDBObject1=new VoterDbo();
+                        voterDBObject1.connectToDB();
+                        voterDBObject1.createVoter(voterInstance2);
+     
      
      int optionForRole=0;
      do
@@ -57,7 +57,7 @@ public class Voteapplication
             {
                 System.out.println("Login Success");
              
-                // Iterative process for Voter Registration, Candidate Rwegistration, Ballot creation and Results
+                /* Iterative process for Voter Registration, Candidate Rwegistration, Ballot creation and Results */
                 do
                 {
              
@@ -68,8 +68,8 @@ public class Voteapplication
                     {
                         /* Voter Registration */
                         Voter voterInstance=new Voter();
-                        //voterInstance=createVoter();
-                        //voterList.add(voterInstance);   
+                        voterInstance=createVoter();
+                        voterList.add(voterInstance);   
                         VoterDbo voterDBObject=new VoterDbo();
                         if(voterDBObject.createVoter(voterInstance))
                         {

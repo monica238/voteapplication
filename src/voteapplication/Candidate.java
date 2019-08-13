@@ -12,6 +12,7 @@ public class Candidate
    private int age;
    private int count;/* variable for total number of candidates*/
    private String city;
+   
   /*Method to store candidate details in database*/    
    public void candidateDetails(String candidateFirstName,String candidateParty,String city,int candidateId,int age)
      {
@@ -21,7 +22,7 @@ public class Candidate
         this.candidateId=candidateId;
         this.age=age;
             
-           // return checkVotersInDatabase(voterName,voterId,aadharNo,age);
+            return checkVotersInDatabase(voterName,voterId,aadharNo,age);
       }
    /*Method to check whether the candidate already exists in database or not*/
    public boolean checkCandidateInDatabase(int candidateId)

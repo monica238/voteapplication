@@ -20,12 +20,12 @@ public class CastVote
    {
      return voterInstance;
    }
-  
+  /* Method to set voter instance */
   public void setVoterInstance(Voter voterInstance)
   {
       this.voterInstance=voterInstance;
   }
-  
+  /* Method to set candidate instance */
   public void setCandidateInstance(Candidate candidateInstance)
   {
       this.candidateInstance=candidateInstance;

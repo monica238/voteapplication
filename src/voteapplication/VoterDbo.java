@@ -15,33 +15,36 @@ public class VoterDbo
      {
          applog=Logger.getLogger(VoterDbo.class);         
      }
-    /* 1. connectToDB() */
+    /* connectToDB() */
     public boolean connectToDB()
     {
-        // Create DB Connection
+        /* Create DB Connection */
         /* JDBC driver name and database url */
-    final String jdbc_driver="com.mysql.jdbc.driver";
-    final String db_url="jdbc:mysql://localhost";
+      final String jdbc_driver="com.mysql.jdbc.driver";
+      final String db_url="jdbc:mysql://localhost";
     
-  /* Database credentials */
+     /* Database credentials */
      final String USER= "monica";
      final String PASS= "Learn@v2l"; 
-        // Check if connection is successful     
+     
+        /* Check if connection is successful */     
      try
       {
         /*Register JDBC driver*/
-        //Class.forName("com.mysql.jdbc.Driver");
+          Class.forName("com.mysql.jdbc.Driver");
           Class.forName("com.mysql.jdbc.Driver");  
-          conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Voting","vish","Learn@v2l");          
+          conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Voting","vish","Learn@v2l");
+          
         /* Open a connection */
         System.out.println("Connecting to database");                
-        //applog.info("DB connection successful!");
+        applog.info("DB connection successful!");
         return true;
       }
-      // Return Success or Failure      
+     
+      /* Return Success or Failure */      
       catch(Exception e)
       {
-          //applog.error(e);
+          applog.error(e);
           return false;
       }
     }
@@ -52,19 +55,18 @@ public class VoterDbo
     {       
        Statement InsertStatement;
         
-        /* 2. Execure SQL Statement for Insert */
+        /* Execure SQL Statement for Insert */
        try
-       {            
-       //insert into Voter(voterId,voterFirstName,voterLastName,voterLocation,voterAge,voterAadharnumber) values(105,'Pramod','S','Mysore',23,12345);
-       String SQLStatement="insert into Voter(voterId,voterFirstName,voterLastName,voterLocation,voterAge,voterAadharnumber) values(106,'Sandeep','S','Mysore',23,12345)";       
-       InsertStatement=conn.createStatement();
-       InsertStatement.execute(SQLStatement);       
-       return true;
-       }
+        {            
+         String SQLStatement="insert into Voter(voterId,voterFirstName,voterLastName,voterLocation,voterAge,voterAadharnumber) values(106,'Sandeep','S','Mysore',23,12345)";       
+         InsertStatement=conn.createStatement();
+         InsertStatement.execute(SQLStatement);       
+         return true;
+        }
        catch(Exception e)
-       {
-         return false;  
-       }
+        {
+          return false;  
+        }
         /*3. Rerurn Success or Failure*/
        
     }
@@ -91,15 +93,15 @@ public class VoterDbo
        {
          return false;  
        }
-        /*3. Rerurn Success or Failure*/
+        /* Rerurn Success or Failure*/
        return null; 
     }
     
     public boolean updateVoter(int voterId,Voter voterInstance)
     {
-        /* 1. connectToDB()*/
+        /* connectToDB()*/
         
-        /* 2. Execure SQL Statement for Select */
+        /* Execure SQL Statement for Select */
         String SQLStatement;
        Statement SelectStatement=null;
        try
@@ -114,14 +116,14 @@ public class VoterDbo
        {
          return false;  
        }
-        /*3. Rerurn Success or Failure*/
+        /* Return Success or Failure*/
         
     
-     /* 3. Check if Voter ID is valid */
+        /* Check if Voter ID is valid */
        if (validateVoterid(voterList,voterId))
          {
            System.out.println("Voter exists");
-           /* 4. If Valid, Execure SQL Statement Update */
+           /* If Valid, Execure SQL Statement Update */
            try
             {                  
               SQLStatement="UPDATE VOTER SET VOTERiD=value"+voterId;
@@ -141,14 +143,14 @@ public class VoterDbo
        
         return false;
        }
-        /* 5. Return Success/Failure */
+        /* Return Success/Failure */
         return true;
     }    
     
     
     public boolean deleteVoter(int voterId)
     {
-        /*3. Execure SQL Statement for Select*/
+        /* Execure SQL Statement for Select */
            String SQLStatement;
        Statement SelectStatement=null;
        try
@@ -163,12 +165,12 @@ public class VoterDbo
        {
          return false;  
        }
-       /* 4. Check if Voter ID is valid*/
+       /* Check if Voter ID is valid*/
       if (validateVoterid(voterList,voterId))
          {
            System.out.println("Voter exists");
            
-       /* 5. If Valid, Execure SQL Statement Delete*/
+       /* If Valid, Execure SQL Statement Delete*/
              String SQLStatement;
        Statement SelectStatement=null;
        try
@@ -188,7 +190,7 @@ public class VoterDbo
       {
           return false;
       }
-      /*  6. Return Success/Failure*/
+      /* Return Success/Failure*/
      return true;           
     }
     

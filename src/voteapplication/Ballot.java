@@ -10,6 +10,7 @@ public class Ballot
 
     private ArrayList<Candidate> candidateList;
     
+    /* Method to create ballot */
     public void createBallot(ArrayList<Candidate> candidateList)
     {
         this.candidateList=candidateList;
