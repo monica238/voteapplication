@@ -22,12 +22,12 @@ public class Voteapplication
      /*
      Sample code Voter
      */
-     /*
+    /*
      Voter v=new Voter();
      VoterDbo vdb=new VoterDbo();
      
      vdb.connectToDB();
-     v=vdb.getVoterObjectById(1011);
+     v=vdb.getVoterObjectById(102);
      if(v!=null)
         System.out.println(v.getVoterFname());
      else
@@ -80,10 +80,8 @@ public class Voteapplication
             DataInputStream in=new DataInputStream(System.in);
             adminUserName=in.readLine();
             adminPassword=in.readLine();
-        
-            System.out.println(adminUserName+"-"+adminPassword);
-        
-            if(admin.validateAdminLogin(adminUserName, adminPassword)==true)
+              
+            if(admin.validateAdminLogin(adminUserName, adminPassword))
             {
                 System.out.println("Login Success");
              
@@ -101,6 +99,7 @@ public class Voteapplication
                         voterInstance=createVoter();
                         voterList.add(voterInstance);   
                         VoterDbo voterDBObject=new VoterDbo();
+                        voterDBObject.connectToDB();
                         if(voterDBObject.createVoter(voterInstance))
                         {
                             System.out.println("Voter details stored successfully");
@@ -115,13 +114,26 @@ public class Voteapplication
                         /* Candidate Registration */
                         Candidate candidateInstance;
                         candidateInstance=createCandidate();
-                        candidateList.add(candidateInstance);                    
+                        candidateList.add(candidateInstance);    
+                        CandidateDbo candidateDBObject=new CandidateDbo();
+                        candidateDBObject.connectToDB();
+                        if(candidateDBObject.createCandidate(candidateInstance))
+                        {
+                            System.out.println("Candidate details stored successfully");
+                        }
+                        else
+                        {
+                            System.out.println("Error in insert query");
+                        }
                     }
                     else if(optionForOperation==3)
                     {
                         /* Create ballot */                        
-                        ballotForVoting=createBallot(candidateList);
-                        isBallotCreated=true;
+                        if(!isBallotCreated)                        
+                        {
+                            ballotForVoting=createBallot(candidateList,adminUserName);
+                            isBallotCreated=true;
+                        }                        
                     }
                     else if(optionForOperation==4)
                     {
@@ -322,10 +334,10 @@ public class Voteapplication
     }
 
    /* Method to create Ballot */
-  public static Ballot createBallot(ArrayList<Candidate> candidateList)
+  public static Ballot createBallot(ArrayList<Candidate> candidateList,String username)
     {
         Ballot ballot=new Ballot();                /* New object created for Ballot class */
-        ballot.createBallot(candidateList);        /* Method class which holds the list of candidates */
+        ballot.createBallot(candidateList,username);        /* Method class which holds the list of candidates */
         return ballot;                             /* Object to be returned */
     }
   /* Method to check ballot creation in database */

@@ -34,8 +34,7 @@ public class VoterDbo
             /*Register JDBC driver*/
             Class.forName("com.mysql.jdbc.Driver");
             Class.forName("com.mysql.jdbc.Driver");  
-            conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Voting",USER,PASS);
-
+            conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Voting",USER,PASS);               
             /* Open a connection */
             System.out.println("Connecting to database");                
             //applog.info("DB connection successful!");

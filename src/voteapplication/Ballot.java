@@ -11,9 +11,12 @@ public class Ballot
     private ArrayList<Candidate> candidateList;
     
     /* Method to create ballot */
-    public void createBallot(ArrayList<Candidate> candidateList)
+    public void createBallot(ArrayList<Candidate> candidateList,String username)
     {
         this.candidateList=candidateList;
+        BallotDbo bdo=new BallotDbo();
+        bdo.connectToDB();
+        bdo.createBallot(username);
     }
     
   /*Method to get candidate object*/  

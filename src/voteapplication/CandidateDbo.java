@@ -52,14 +52,14 @@ public class CandidateDbo
     } 
             
     // CRUD Operation
-    public boolean createCandidate(Voter candidateInstance)
+    public boolean createCandidate(Candidate candidateInstance)
     {       
        Statement InsertStatement;
               
        /* Execure SQL Statement for Insert */
        try
         {            
-            String SQLStatement="insert into Candidate(candidateId,candidateFirstName,candidatePartyName,candidateLocation,candidateAge) values(";//+voterInstance.getVoterId()+",'"+voterInstance.getVoterFname()+"','"+voterInstance.getVoterLname()+"','"+voterInstance.getVoterLocation()+"',"+voterInstance.getVoterAge()+","+voterInstance.getVoterAadharNo()+")";       
+            String SQLStatement="insert into Candidate(candidateId,candidateFirstName,candidatePartyName,candidateLocation,candidateAge) values("+candidateInstance.getCandidateId()+",'"+candidateInstance.getCandidateFirstName()+"','"+candidateInstance.getCandidatePartyName()+"','"+candidateInstance.getCandidateLocation()+"',"+candidateInstance.getCandidateAge()+")";
             InsertStatement=conn.createStatement();
             InsertStatement.execute(SQLStatement);       
             return true;
