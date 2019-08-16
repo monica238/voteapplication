@@ -349,10 +349,16 @@ public class Voteapplication
    /* Method to validate whether voter id exists in the voter list or not */     
    public static boolean validateVoterid(ArrayList<Voter> voterList,int voterId)
     {
-        for(int i=0;i<voterList.size();i++)
-            if(voterList.get(i).checkVotersInDatabase(voterId))      /* check for the voter id in the database */
-                return true;                                         /* if voter id exists in database */
-        return false;                                                /* if voter id does not exists in database */
+//        for(int i=0;i<voterList.size();i++)
+//            if(voterList.get(i).checkVotersInDatabase(voterId))      /* check for the voter id in the database */
+//                return true;                                         /* if voter id exists in database */
+//        return false; /* if voter id does not exists in database */
+        
+        VoterDbo vdbo=new VoterDbo();
+        vdbo.connectToDB();
+        if(vdbo.getVoterObjectById(voterId)!=null)
+            return true;
+        return false;
     }
    
    /* Method to validate whether candidate id exists in the candidate list or not */
