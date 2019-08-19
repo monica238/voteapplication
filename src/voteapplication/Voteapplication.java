@@ -383,54 +383,54 @@ public class Voteapplication
       }
 }
       
-//   /* Method to calculate results */
-//   public static void votingresults()
-//   {
-////     int candidate[]= new int[6];  
-////     int voters;
-////     int ballot=0;
-////     int count=0;
-////     int check=0,winner=0,looser=0;
-////     String str;
-////     try
-////     {
-////         
-////         System.out.println("enter the number of voters appeared for voting");
-////         check=Integer.parseInt(str);
-////         for(int i=1;i<=voters;i++)
-////             System.out.print("vote given by voter("+i+") to candidate:");
-////             str=readLine();
-////         if(check<1 && check>ArrayList<CastVote> castVoteList)
-////         {
-////             ballot=ballot+1;
-////             continue;
-////         }
-////         else
-////         {
-////             candidate[check]=candidate[check]+1;
-////         }
-////     }
-////     
-////     System.out.println("Voting results are");
-////     for(int i=1;i<=;i++)
-////     {
-////         System.out.println("candidateid:"+i+" has received "+candidate[i]+"votes");
-////     }   
-////     for(int i=1;i<=;i++)
-////         
-////     {
-////         if(i==1)
-////             winner=i;
-////        
-////     }
-//     
-////   }
-//       
-//       
-//           
-//       
-//}
-//                  
+   /* Method to calculate results */
+   public static void votingresults()
+   {
+     int candidate[]= new int[6];  
+     int voters;
+     int ballot=0;
+     int count=0;
+     int check=0,winner=0,looser=0;
+     String str;
+     try
+     {
+         
+         System.out.println("enter the number of voters appeared for voting");
+         check=Integer.parseInt(str);
+         for(int i=1;i<=voters;i++)
+             System.out.print("vote given by voter("+i+") to candidate:");
+             str=readLine();
+         if(check<1 && check>ArrayList<CastVote> castVoteList)
+         {
+             ballot=ballot+1;
+             continue;
+         }
+         else
+         {
+             candidate[check]=candidate[check]+1;
+         }
+     }
+     
+     System.out.println("Voting results are");
+     for(int i=1;i<=ArrayList<CastVote>;i++)
+     {
+         System.out.println("candidateid:"+i+" has received "+candidate[i]+"votes");
+     }   
+     for(int i=1;i<=;i++)
+         
+     {
+         if(i==1)
+             winner=i;
+        
+     }
+     
+   }
+       
+       
+           
+       
+}
+                  
           
   
           

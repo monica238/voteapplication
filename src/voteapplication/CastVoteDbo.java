@@ -72,6 +72,10 @@ public class CastVoteDbo
        SQLStatement="Select * from Ballot where candidateId="+candidateId;
        SelectStatement=conn.createStatement();
        SelectStatement.execute(SQLStatement);
+       ResultSet castVoteData=SelectStatement.getResultSet();
+       castVoteData.next();       
+       CastVote castVoteInstance=new CastVote();
+       castVoteInstance.setCandidateId(castVoteData.getInt("candidateId"));
        
     }
              
