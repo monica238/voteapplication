@@ -63,9 +63,9 @@ public class CastVoteDbo
         return false;
           
     }
-    public boolean getCastVoteInstance()
+    public CastVote getCastVoteInstanceById(int candidateId)
     {
-        Statement SQLStatement;
+        String SQLStatement;
         Statement SelectStatement=null;
         try
        {                  
@@ -76,8 +76,16 @@ public class CastVoteDbo
        castVoteData.next();       
        CastVote castVoteInstance=new CastVote();
        castVoteInstance.setCandidateId(castVoteData.getInt("candidateId"));
+       }
+     catch(Exception e)
+       {
+          System.out.println("No CandidateID is found :"+candidateId);
+       }
+        /* Rerurn Success or Failure*/
+       return null;  
+        }
        
     }
              
     
-}
+

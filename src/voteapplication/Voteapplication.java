@@ -1,5 +1,6 @@
 package voteapplication;
 import java.io.DataInputStream;
+import java.io.*;
 import java.lang.Exception;
 import java.util.ArrayList;
 
@@ -381,10 +382,10 @@ public class Voteapplication
           }
           return noOne;
       }
-}
+
       
    /* Method to calculate results */
-   public static void votingresults()
+   public static Result votingresults()
    {
      int candidate[]= new int[6];  
      int voters;
@@ -394,12 +395,13 @@ public class Voteapplication
      String str;
      try
      {
-         
+         BufferedReader obj=new BufferedReader(new InputStreamReader(System.in));
          System.out.println("enter the number of voters appeared for voting");
-         check=Integer.parseInt(str);
+         str=obj.readLine();
+         voters=Integer.parseInt(str);
          for(int i=1;i<=voters;i++)
              System.out.print("vote given by voter("+i+") to candidate:");
-             str=readLine();
+             str=obj.readLine();
          if(check<1 && check>ArrayList<CastVote> castVoteList)
          {
              ballot=ballot+1;
@@ -409,19 +411,39 @@ public class Voteapplication
          {
              candidate[check]=candidate[check]+1;
          }
-     }
+     
      
      System.out.println("Voting results are");
-     for(int i=1;i<=ArrayList<CastVote>;i++)
+     for(int i=1;i<=ArrayList<CastVote> castVoteList;i++)
      {
          System.out.println("candidateid:"+i+" has received "+candidate[i]+"votes");
      }   
      for(int i=1;i<=;i++)
-         
      {
-         if(i==1)
-             winner=i;
-        
+         for(int j=1;j<=;j++)
+         {
+         
+            if(i==1)
+            {
+              winner=i;
+              looser=i;
+            }
+           if(candidate[i]<candidate[j])
+           {
+             winner=j;
+           }
+           if(candidate[i]>candidate[j])
+           {
+             looser=j;
+           }
+        }
+      }
+     System.out.println("winner is candidate" +winner+ "received" +candidate[winner]+ "votes");
+     System.out.println("candidate" +looser+ "received the lowest votes that is" +candidate[looser]);
+   }
+     catch(Exception e)
+     {
+         return null;
      }
      
    }
