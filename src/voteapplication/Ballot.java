@@ -32,7 +32,9 @@ public class Ballot
    
   public ArrayList<Candidate> getCandidates()
   {
-          return candidateList;
+      BallotDbo bdbo=new BallotDbo();
+      bdbo.connectToDB();
+      return bdbo.getBallotCandidates();
   }
   /*Method to validate whether the ballot is created or not*/
    public boolean checkBallotcreationInDatabase()

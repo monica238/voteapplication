@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import org.apache.log4j.Logger;
+import java.util.ArrayList;
 
 /**
  *
@@ -71,4 +72,35 @@ public class BallotDbo {
         return false;
     
     }
+    
+     public ArrayList<Candidate> getBallotCandidates()
+     {
+         ArrayList<Candidate> candidatesInBallot=new ArrayList();
+         String SQLStatement;  
+         Statement SelectStatement;
+           try
+           {
+                SQLStatement="select * from ballot_Candidates";
+                SelectStatement=conn.createStatement();
+                SelectStatement.execute(SQLStatement);
+       
+                ResultSet candidateData=SelectStatement.getResultSet();
+                
+                while(candidateData.next())
+                {                                       
+                    CandidateDbo cdbo=new CandidateDbo();
+                    cdbo.connectToDB();
+                    int candidateId;
+                    candidateId=candidateData.getInt("CandidateId");
+                    candidatesInBallot.add(cdbo.getCandidateObjectById(candidateId));
+                }
+           }
+         catch(Exception e)
+         {
+             System.out.println(e);
+         }
+           return candidatesInBallot;
+           
+     }
+              
 }

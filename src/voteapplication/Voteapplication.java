@@ -10,7 +10,7 @@ public class Voteapplication
    {
      Admin admin=new Admin();                                       
      
-     Ballot ballotForVoting=null;
+     Ballot ballotForVoting=new Ballot();
      ArrayList voterList=new ArrayList();
      ArrayList candidateList=new ArrayList();
      ArrayList castVoteList=new ArrayList();
@@ -181,7 +181,7 @@ public class Voteapplication
                     {
                         System.out.println("Voter exists");
 
-                       /* Show Ballot for Voting */
+                       /* Show Ballot for Voting */                       
                        ArrayList<Candidate> candidateListInBallot=ballotForVoting.getCandidates();
                        for(int i=0;i<candidateListInBallot.size();i++)
                             System.out.println(candidateListInBallot.get(i).showCandidateDetails());
@@ -365,9 +365,7 @@ public class Voteapplication
    /* Method to validate whether candidate id exists in the candidate list or not */
       public static boolean validateCandidateId(ArrayList<Candidate> candidateList,int candidateId)
     {
-        for(int i=0;i<candidateList.size();i++)
-            if(candidateList.get(i).checkCandidateInDatabase(candidateId))
-                return true;
+       
         return false;   
     }
    /* Method to get the voter instance by voter id */
@@ -387,65 +385,7 @@ public class Voteapplication
    /* Method to calculate results */
    public static Result votingresults()
    {
-     int candidate[]= new int[6];  
-     int voters;
-     int ballot=0;
-     int count=0;
-     int check=0,winner=0,looser=0;
-     String str;
-     try
-     {
-         BufferedReader obj=new BufferedReader(new InputStreamReader(System.in));
-         System.out.println("enter the number of voters appeared for voting");
-         str=obj.readLine();
-         voters=Integer.parseInt(str);
-         for(int i=1;i<=voters;i++)
-             System.out.print("vote given by voter("+i+") to candidate:");
-             str=obj.readLine();
-         if(check<1 && check>ArrayList<CastVote> castVoteList)
-         {
-             ballot=ballot+1;
-             continue;
-         }
-         else
-         {
-             candidate[check]=candidate[check]+1;
-         }
-     
-     
-     System.out.println("Voting results are");
-     for(int i=1;i<=ArrayList<CastVote> castVoteList;i++)
-     {
-         System.out.println("candidateid:"+i+" has received "+candidate[i]+"votes");
-     }   
-     for(int i=1;i<=;i++)
-     {
-         for(int j=1;j<=;j++)
-         {
-         
-            if(i==1)
-            {
-              winner=i;
-              looser=i;
-            }
-           if(candidate[i]<candidate[j])
-           {
-             winner=j;
-           }
-           if(candidate[i]>candidate[j])
-           {
-             looser=j;
-           }
-        }
-      }
-     System.out.println("winner is candidate" +winner+ "received" +candidate[winner]+ "votes");
-     System.out.println("candidate" +looser+ "received the lowest votes that is" +candidate[looser]);
-   }
-     catch(Exception e)
-     {
-         return null;
-     }
-     
+        return null;  
    }
        
        
