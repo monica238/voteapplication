@@ -17,6 +17,15 @@ public class AdminDbo {
     private Connection conn;
     private Logger applog;
 
+    public AdminDbo()
+    {
+        applog=Logger.getLogger(AdminDbo.class);
+        String str;
+        // Get Path of the current project folder
+        str=System.getProperty("user.dir");        
+        PropertyConfigurator.configure(str+"\\src\\voteapplication\\log4j.properties");                        
+    }
+    
     /* connectToDB() */
     public boolean connectToDB() {
         /* Create DB Connection */
@@ -59,13 +68,16 @@ public class AdminDbo {
             SQLStatement = conn.createStatement();
             ResultSet rs = SQLStatement.executeQuery("select * from Authentication where username='" + username + "' and password='" + password + "'");
 
-            if (rs.next()) {
+            if (rs.next()) 
+            {
+                applog.info("Authentication Successful!");
                 return true;
             }
         } catch (Exception e) {
             applog.error(e);
         }
         closeDbConnection();
+        applog.info("Authentication Failure!");
         return false;
 
     }
