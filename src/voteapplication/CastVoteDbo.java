@@ -43,6 +43,19 @@ public class CastVoteDbo
         }
         return false;
     }
+    
+        public void closeDbConnection()
+    {
+        try
+        {
+        conn.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+    
     public boolean createCastVote(CastVote castVoteInstance)
     {
        Statement InsertStatement;
@@ -50,7 +63,8 @@ public class CastVoteDbo
        /* Execure SQL Statement for Insert */
        try
         {            
-            String SQLStatement="insert into CastVote(castVoteId,voterId,candidateId,dateOfVoting) values(1,'"+castVoteInstance.getVoterInstance().getVoterId()+"','"+castVoteInstance.getCandidateInstance().getCandidateId()+"','date('2019-9-14')))";
+            String SQLStatement="insert into CastVote(castVoteId,voterId,candidateId,dateOfVoting) values(1,"+castVoteInstance.getVoterInstance().getVoterId()+","+castVoteInstance.getCandidateInstance().getCandidateId()+",current_date())";
+            System.out.println(SQLStatement);
             InsertStatement=conn.createStatement();
             InsertStatement.execute(SQLStatement);       
             return true;
@@ -62,28 +76,34 @@ public class CastVoteDbo
          /*3. Rerurn Success or Failure*/  
         return false;
           
-    }
-    public CastVote getCastVoteInstanceById(int candidateId)
+    }    
+    
+     public boolean checkIfVotingIsDone(int voterId)
     {
-        String SQLStatement;
-        Statement SelectStatement=null;
-        try
+        
+        /* 2. Execure SQL Statement for Select */
+       String SQLStatement;
+       Statement SelectStatement=null;
+        
+        /* 2. Execure SQL Statement for Insert */
+       try
        {                  
-//       SQLStatement="Select * from Ballot where candidateId="+candidateId;
-//       SelectStatement=conn.createStatement();
-//       SelectStatement.execute(SQLStatement);
-//       ResultSet castVoteData=SelectStatement.getResultSet();
-//       castVoteData.next();       
-//       CastVote castVoteInstance=new CastVote();
-//       castVoteInstance.setCandidateId(castVoteData.getInt("candidateId"));
+       SQLStatement="Select count(VoterId) as cnt from CastVote where VoterId="+voterId;
+       SelectStatement=conn.createStatement();
+       SelectStatement.execute(SQLStatement);
+       
+       ResultSet voterData=SelectStatement.getResultSet();
+       voterData.next();       
+       if(voterData.getInt("cnt")>0)
+        return true;              
        }
-     catch(Exception e)
+       catch(Exception e)
        {
-          System.out.println("No CandidateID is found :"+candidateId);
+          System.out.println("No Record found for VoterId:"+voterId);
        }
         /* Rerurn Success or Failure*/
-       return null;  
-        }
+       return false; 
+    }  
        
     }
              

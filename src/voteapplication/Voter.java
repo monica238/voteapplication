@@ -27,6 +27,9 @@ public class Voter
       voterLocation=location;
       voterAge=age;
       voterAadharNo=aadharNo;
+      VoterDbo vdbo=new VoterDbo();
+      vdbo.connectToDB();
+      vdbo.createVoter(this);
     }
   /* Method to check whether voter exists in database or not */
   public boolean checkVotersInDatabase(int voterId)
@@ -38,6 +41,15 @@ public class Voter
         return false;
       
     }     
+  
+  
+  public Voter getVoterById(int voterId)
+  {
+        VoterDbo vdo=new VoterDbo();
+        vdo.connectToDB();        
+        return vdo.getVoterObjectById(voterId);
+  }
+  
  /* Method to retrieve voter profile details
    format of retrival: ID | AADHARNO | FNAME | LNAME | LOCATION | AGE */
    public String showVoterDetails()

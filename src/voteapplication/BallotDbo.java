@@ -55,6 +55,18 @@ public class BallotDbo {
         return false;
     } 
     
+        public void closeDbConnection()
+    {
+        try
+        {
+        conn.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+    
     public boolean createBallot(String createdBy)
     {
         Statement SQLStatement;
@@ -100,6 +112,34 @@ public class BallotDbo {
              System.out.println(e);
          }
            return candidatesInBallot;
+           
+     }
+     
+     public boolean isBallotCreated()
+     {         
+         String SQLStatement;  
+         Statement SelectStatement;
+           try
+           {
+                SQLStatement="select count(CandidateId) as BallotCount from ballot_Candidates";
+                SelectStatement=conn.createStatement();
+                SelectStatement.execute(SQLStatement);
+       
+                ResultSet ballotData=SelectStatement.getResultSet();
+                
+                while(ballotData.next())
+                {                                       
+                    int ballotCount;
+                    ballotCount=ballotData.getInt("BallotCount");                                       
+                    if(ballotCount>0)
+                        return true;
+                }
+           }
+         catch(Exception e)
+         {
+             System.out.println(e);
+         }
+           return false;
            
      }
               

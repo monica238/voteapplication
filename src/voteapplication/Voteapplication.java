@@ -16,44 +16,6 @@ public class Voteapplication
    
      String adminUserName;
      String adminPassword;
-
-     /*
-     Sample code Voter
-     */
-    /*
-     Voter v=new Voter();
-     VoterDbo vdb=new VoterDbo();
-     
-     vdb.connectToDB();
-     v=vdb.getVoterObjectById(102);
-     if(v!=null)
-        System.out.println(v.getVoterFname());
-     else
-         System.out.println("Invalid VoterID");
-     System.exit(0);
-     */
-     /*
-     Sample code Voter
-     */
-
-     /*
-     Sample code Voter
-     */
-     /*
-     Candidate v=new Candidate();
-     CandidateDbo vdb=new CandidateDbo();
-     
-     vdb.connectToDB();
-     v=vdb.getCandidateObjectById(11);
-     if(v!=null)
-        System.out.println(v.getCandidateFirstName());
-     else
-         System.out.println("Invalid CandidateId");
-     System.exit(0);
-     */
-     /*
-     Sample code Voter
-     */
      
      int optionForRole=0;
      do
@@ -93,36 +55,16 @@ public class Voteapplication
                     if(optionForOperation==1)
                     {
                         /* Voter Registration */
-                        Voter voterInstance=new Voter();
-                        voterInstance=createVoter();
-                         
-                        VoterDbo voterDBObject=new VoterDbo();
-                        voterDBObject.connectToDB();
-                        if(voterDBObject.createVoter(voterInstance))
-                        {
-                            System.out.println("Voter details stored successfully");
-                        }
-                        else
-                        {
-                            System.out.println("Error in insert query");
-                        }
+                        Voter voterInstance;
+                        voterInstance=createVoter();                                                 
+                        System.out.println("Voter details stored successfully");                        
                     }
                     else if(optionForOperation==2)
                     {
                         /* Candidate Registration */
                         Candidate candidateInstance;
                         candidateInstance=createCandidate();
-                          
-                        CandidateDbo candidateDBObject=new CandidateDbo();
-                        candidateDBObject.connectToDB();
-                        if(candidateDBObject.createCandidate(candidateInstance))
-                        {
-                            System.out.println("Candidate details stored successfully");
-                        }
-                        else
-                        {
-                            System.out.println("Error in insert query");
-                        }
+                        System.out.println("Candidate details stored successfully");
                     }
                     else if(optionForOperation==3)
                     {
@@ -136,7 +78,7 @@ public class Voteapplication
                     else if(optionForOperation==4)
                     {
                         /* RESULTS */
-                        System.out.println();                                            
+                        System.out.println("RESULTS");                                            
                     }
                     else if(optionForOperation==5)
                     {
@@ -177,11 +119,11 @@ public class Voteapplication
                     if (validateVoterid(voterId))
                     {
                         System.out.println("Voter exists");
-
+                        ArrayList<Candidate> InBallot;
                        /* Show Ballot for Voting */                       
-                       InBallot=ballotForVoting.getCandidates();
-                       for(int i=0;i<;i++)
-                            System.out.println(InBallot.get(i).showCandidateDetails());
+                       InBallot=ballotForVoting.getCandidates();                       
+                       for(int i=0;i<InBallot.size();i++)
+                       System.out.println(InBallot.get(i).showCandidateDetails());
 
                        /* Accept the Candidate ID */
                        System.out.println("Enter the candidate id");
@@ -195,7 +137,7 @@ public class Voteapplication
                        /* If Candidate exists, get CandidateOBject from ballotForVoting */
                            Candidate candidateInstance;
                            candidateInstance=ballotForVoting.getCandidate(candidateId);
-
+                           
                            /* Get Voter  Instance from the registration database */
                            Voter voterInstance;
                            voterInstance=getVoterInstanceById(voterId);
@@ -204,12 +146,19 @@ public class Voteapplication
                            /* If voting is done add the cast vote to the cast vote list */
                            CastVote castVoteInstance;
                            castVoteInstance=new CastVote();
-
-                           castVoteInstance.setCandidateInstance(candidateInstance);
-                           castVoteInstance.setVoterInstance(voterInstance);
-
-                           .add(castVoteInstance);
-                           System.out.println("Voting process is completed..Thank You");
+                           
+                           if(!castVoteInstance.checkIfVotingIsDone(voterId))
+                           {
+                                castVoteInstance.setCandidateInstance(candidateInstance);
+                                castVoteInstance.setVoterInstance(voterInstance);
+                                castVoteInstance.castVote();                           
+                                System.out.println("Voting process is completed..Thank You");
+                           }
+                           else
+                           {
+                                System.out.println("Your voting is already recorded! Please try in next election");
+                           }
+                           
                          }
 
                        /* If the candidate id selected by voter is not correct */
@@ -322,7 +271,7 @@ public class Voteapplication
               System.out.println("Enter the city:");
               city=in.readLine();
            
-             candidateInstance.candidateDetails(candidateFirstName,candidateParty,city,candidateId,age);           
+             candidateInstance.storeCandidateDetails(candidateFirstName,candidateParty,city,candidateId,age);           
            }
          catch (Exception e)
            {
@@ -347,36 +296,22 @@ public class Voteapplication
    /* Method to validate whether voter id exists in the voter list or not */     
    public static boolean validateVoterid(int voterId)
     {
-//        for(int i=0;i<voterList.size();i++)
-//            if(voterList.get(i).checkVotersInDatabase(voterId))      /* check for the voter id in the database */
-//                return true;                                         /* if voter id exists in database */
-//        return false; /* if voter id does not exists in database */
-        
-        VoterDbo vdbo=new VoterDbo();
-        vdbo.connectToDB();
-        if(vdbo.getVoterObjectById(voterId)!=null)
-            return true;
-        return false;
+       
+        Voter vo=new Voter();                
+        return vo.checkVotersInDatabase(voterId);
     }
    
    /* Method to validate whether candidate id exists in the candidate list or not */
       public static boolean validateCandidateId(int candidateId)
     {
-       
-        return false;   
+        Candidate co=new Candidate();
+        return co.checkCandidateInDatabase(candidateId);   
     }
    /* Method to get the voter instance by voter id */
       public static Voter getVoterInstanceById(int voterId)
       {
-          vdbo.connectToDB();
-        Voter noOne=new Voter();
-        noOne.voterRegistration(0,"NONE", "NONE", "NONE", 0, 0);
-          for(int i=0;i;i++)
-          {
-              if(vdboDbo.get(i).checkVotersInDatabase(voterId))
-                  vdbo.get(i);
-          }
-          return noOne;
+          Voter vo=new Voter();
+          return vo.getVoterById(voterId);
       }
 
       

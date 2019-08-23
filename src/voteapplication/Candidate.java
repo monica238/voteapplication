@@ -15,7 +15,7 @@ public class Candidate
    
    
   /*Method to store candidate details in database*/    
-   public void candidateDetails(String candidateFirstName,String candidateParty,String city,int candidateId,int age)
+   public void storeCandidateDetails(String candidateFirstName,String candidateParty,String city,int candidateId,int age)
      {
         this.candidateFirstName=candidateFirstName;
         this.candidateParty=candidateParty;
@@ -23,12 +23,14 @@ public class Candidate
         this.candidateId=candidateId;
         this.age=age;
             
-            //return checkVotersInDatabase(voterName,voterId,aadharNo,age);       
+        CandidateDbo cdbo=new CandidateDbo();
+        cdbo.connectToDB();
+        cdbo.createCandidate(this);
       }
    /*Method to check whether the candidate already exists in database or not*/
    public boolean checkCandidateInDatabase(int candidateId)
      {
-         CandidateDbo cdo=new CandidateDbo();
+        CandidateDbo cdo=new CandidateDbo();
         cdo.connectToDB();        
         if(cdo.getCandidateObjectById(candidateId)!=null)
             return true;

@@ -51,6 +51,18 @@ public class AdminDbo {
         return false;
     } 
     
+        public void closeDbConnection()
+    {
+        try
+        {
+        conn.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+        
     public boolean authenticateAdmin(String username,String password)
     {
         Statement SQLStatement;
@@ -66,6 +78,7 @@ public class AdminDbo {
         {
             applog.error(e);
         }
+        closeDbConnection();
         return false;
     
     }

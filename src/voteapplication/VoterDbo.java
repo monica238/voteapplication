@@ -48,7 +48,18 @@ public class VoterDbo
         }
         return false;
     } 
-            
+
+    public void closeDbConnection()
+    {
+        try
+        {
+        conn.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
     // CRUD Operation
     public boolean createVoter(Voter voterInstance)
     {       

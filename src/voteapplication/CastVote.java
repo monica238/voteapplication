@@ -10,11 +10,25 @@ public class CastVote
   private Candidate candidateInstance;
   
   
+ public void castVote()
+ {
+     CastVoteDbo cvdbo=new CastVoteDbo();
+     cvdbo.connectToDB();
+     cvdbo.createCastVote(this);
+ }
+  
   /* Method to accept candidate Id*/
   public Candidate getCandidateInstance()
    { 
      return candidateInstance;
    }
+  
+  public boolean checkIfVotingIsDone(int voterId)
+  {
+      CastVoteDbo cvdbo=new CastVoteDbo();
+      cvdbo.connectToDB();
+      return cvdbo.checkIfVotingIsDone(voterId);
+  }
   
   /*Method to accept voter Id*/
   public Voter getVoterInstance()

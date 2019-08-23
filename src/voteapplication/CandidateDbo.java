@@ -51,6 +51,17 @@ public class CandidateDbo
         return false;
     } 
             
+       public void closeDbConnection()
+    {
+        try
+        {
+        conn.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
     // CRUD Operation
     public boolean createCandidate(Candidate candidateInstance)
     {       
