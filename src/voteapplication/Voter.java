@@ -31,9 +31,12 @@ public class Voter
   /* Method to check whether voter exists in database or not */
   public boolean checkVotersInDatabase(int voterId)
     {
-      if(this.voterId==voterId)
-         return true;
-         return false;
+        VoterDbo vdo=new VoterDbo();
+        vdo.connectToDB();        
+        if(vdo.getVoterObjectById(voterId)!=null)
+            return true;
+        return false;
+      
     }     
  /* Method to retrieve voter profile details
    format of retrival: ID | AADHARNO | FNAME | LNAME | LOCATION | AGE */

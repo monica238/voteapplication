@@ -9,6 +9,7 @@ public class CastVote
   private Voter voterInstance;
   private Candidate candidateInstance;
   
+  
   /* Method to accept candidate Id*/
   public Candidate getCandidateInstance()
    { 

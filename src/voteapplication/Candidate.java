@@ -28,9 +28,11 @@ public class Candidate
    /*Method to check whether the candidate already exists in database or not*/
    public boolean checkCandidateInDatabase(int candidateId)
      {
-        if(this.candidateId==candidateId)
+         CandidateDbo cdo=new CandidateDbo();
+        cdo.connectToDB();        
+        if(cdo.getCandidateObjectById(candidateId)!=null)
             return true;
-           return false;
+        return false;
      }     
    /* Method to retrieve candidate profile details
    format of retrival: CANDIDATEID | CANDIDATEFIRSTNAME | CANDIDATEPARTY | CITY | AGE */    

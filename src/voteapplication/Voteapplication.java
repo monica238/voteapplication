@@ -11,9 +11,6 @@ public class Voteapplication
      Admin admin=new Admin();                                       
      
      Ballot ballotForVoting=new Ballot();
-     ArrayList voterList=new ArrayList();
-     ArrayList candidateList=new ArrayList();
-     ArrayList castVoteList=new ArrayList();
      
      boolean isBallotCreated=false;
    
@@ -98,7 +95,7 @@ public class Voteapplication
                         /* Voter Registration */
                         Voter voterInstance=new Voter();
                         voterInstance=createVoter();
-                        voterList.add(voterInstance);   
+                         
                         VoterDbo voterDBObject=new VoterDbo();
                         voterDBObject.connectToDB();
                         if(voterDBObject.createVoter(voterInstance))
@@ -115,7 +112,7 @@ public class Voteapplication
                         /* Candidate Registration */
                         Candidate candidateInstance;
                         candidateInstance=createCandidate();
-                        candidateList.add(candidateInstance);    
+                          
                         CandidateDbo candidateDBObject=new CandidateDbo();
                         candidateDBObject.connectToDB();
                         if(candidateDBObject.createCandidate(candidateInstance))
@@ -132,14 +129,14 @@ public class Voteapplication
                         /* Create ballot */                        
                         if(!isBallotCreated)                        
                         {
-                            ballotForVoting=createBallot(candidateList,adminUserName);
+                            ballotForVoting=createBallot(adminUserName);
                             isBallotCreated=true;
                         }                        
                     }
                     else if(optionForOperation==4)
                     {
                         /* RESULTS */
-                        System.out.println(castVoteList.size());                                            
+                        System.out.println();                                            
                     }
                     else if(optionForOperation==5)
                     {
@@ -169,7 +166,7 @@ public class Voteapplication
            /* To evaluate whether the voter id is valid or not */
                     int voterId;
                     int candidateId;
-                    System.out.println(voterList.size());
+                    System.out.println();
                     System.out.println("Please enter voter id to validate:");
                     DataInputStream in=new DataInputStream(System.in);
                     try
@@ -177,21 +174,21 @@ public class Voteapplication
                     voterId=Integer.parseInt(in.readLine());
 
 
-                    if (validateVoterid(voterList,voterId))
+                    if (validateVoterid(voterId))
                     {
                         System.out.println("Voter exists");
 
                        /* Show Ballot for Voting */                       
-                       ArrayList<Candidate> candidateListInBallot=ballotForVoting.getCandidates();
-                       for(int i=0;i<candidateListInBallot.size();i++)
-                            System.out.println(candidateListInBallot.get(i).showCandidateDetails());
+                       InBallot=ballotForVoting.getCandidates();
+                       for(int i=0;i<;i++)
+                            System.out.println(InBallot.get(i).showCandidateDetails());
 
                        /* Accept the Candidate ID */
                        System.out.println("Enter the candidate id");
                        candidateId=Integer.parseInt(in.readLine());
 
                        /* Validate the Candiate ID */
-                       if (validateCandidateId(candidateList,candidateId))
+                       if (validateCandidateId(candidateId))
                          {
                            System.out.println("Candidate id exists");
 
@@ -201,7 +198,7 @@ public class Voteapplication
 
                            /* Get Voter  Instance from the registration database */
                            Voter voterInstance;
-                           voterInstance=getVoterInstanceById(voterList,voterId);
+                           voterInstance=getVoterInstanceById(voterId);
 
 
                            /* If voting is done add the cast vote to the cast vote list */
@@ -211,7 +208,7 @@ public class Voteapplication
                            castVoteInstance.setCandidateInstance(candidateInstance);
                            castVoteInstance.setVoterInstance(voterInstance);
 
-                           castVoteList.add(castVoteInstance);
+                           .add(castVoteInstance);
                            System.out.println("Voting process is completed..Thank You");
                          }
 
@@ -335,10 +332,10 @@ public class Voteapplication
     }
 
    /* Method to create Ballot */
-  public static Ballot createBallot(ArrayList<Candidate> candidateList,String username)
+  public static Ballot createBallot(String username)
     {
         Ballot ballot=new Ballot();                /* New object created for Ballot class */
-        ballot.createBallot(candidateList,username);        /* Method class which holds the list of candidates */
+        ballot.createBallot(username);        /* Method class which holds the list of candidates */
         return ballot;                             /* Object to be returned */
     }
   /* Method to check ballot creation in database */
@@ -348,7 +345,7 @@ public class Voteapplication
     }
        
    /* Method to validate whether voter id exists in the voter list or not */     
-   public static boolean validateVoterid(ArrayList<Voter> voterList,int voterId)
+   public static boolean validateVoterid(int voterId)
     {
 //        for(int i=0;i<voterList.size();i++)
 //            if(voterList.get(i).checkVotersInDatabase(voterId))      /* check for the voter id in the database */
@@ -363,20 +360,21 @@ public class Voteapplication
     }
    
    /* Method to validate whether candidate id exists in the candidate list or not */
-      public static boolean validateCandidateId(ArrayList<Candidate> candidateList,int candidateId)
+      public static boolean validateCandidateId(int candidateId)
     {
        
         return false;   
     }
    /* Method to get the voter instance by voter id */
-      public static Voter getVoterInstanceById(ArrayList<Voter> voterList,int voterId)
+      public static Voter getVoterInstanceById(int voterId)
       {
+          vdbo.connectToDB();
         Voter noOne=new Voter();
         noOne.voterRegistration(0,"NONE", "NONE", "NONE", 0, 0);
-          for(int i=0;i<voterList.size();i++)
+          for(int i=0;i;i++)
           {
-              if(voterList.get(i).checkVotersInDatabase(voterId))
-                  voterList.get(i);
+              if(vdboDbo.get(i).checkVotersInDatabase(voterId))
+                  vdbo.get(i);
           }
           return noOne;
       }

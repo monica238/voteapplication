@@ -8,10 +8,9 @@ import java.util.ArrayList;
 public class Ballot 
 {
 
-    private ArrayList<Candidate> candidateList;
     
     /* Method to create ballot */
-    public void createBallot(ArrayList<Candidate> candidateList,String username)
+    public void createBallot(String username)
     {
         this.candidateList=candidateList;
         BallotDbo bdo=new BallotDbo();
@@ -24,13 +23,13 @@ public class Ballot
     {
         Candidate noOne=new Candidate();
         noOne.candidateDetails("NONE", "NONE", "NONE", 0, 0);
-      for(int i=0;i<candidateList.size();i++)
-          if(candidateList.get(i).checkCandidateInDatabase(candidateId))
-              return candidateList.get(i);
+      for(int i=0;i<;i++)
+          if(.get(i).checkCandidateInDatabase(candidateId))
+              return .get(i);
       return noOne;
     }
    
-  public ArrayList<Candidate> getCandidates()
+  public Ballot getCandidates()
   {
       BallotDbo bdbo=new BallotDbo();
       bdbo.connectToDB();
@@ -39,7 +38,7 @@ public class Ballot
   /*Method to validate whether the ballot is created or not*/
    public boolean checkBallotcreationInDatabase()
     {
-      if(candidateList.size()>0)        
+      if(>0)        
             return true;
         return false;
      }
