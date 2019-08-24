@@ -16,6 +16,7 @@ public class Voter {
     private String voterLocation;
     private int voterAge;
     private boolean voted;
+    private VoterDbo vdbo;
 
     /* Method to register voter into database */
     public void voterRegistration(int id, String fname, String lname, String location, int age, int aadharNo) {
@@ -25,16 +26,16 @@ public class Voter {
         voterLocation = location;
         voterAge = age;
         voterAadharNo = aadharNo;
-        VoterDbo vdbo = new VoterDbo();
+        vdbo = new VoterDbo();
         vdbo.connectToDB();
         vdbo.createVoter(this);
     }
     /* Method to check whether voter exists in database or not */
 
     public boolean checkVotersInDatabase(int voterId) {
-        VoterDbo vdo = new VoterDbo();
-        vdo.connectToDB();
-        if (vdo.getVoterObjectById(voterId) != null) {
+        vdbo = new VoterDbo();
+        vdbo.connectToDB();
+        if (vdbo.getVoterObjectById(voterId) != null) {
             return true;
         }
         return false;
@@ -42,9 +43,9 @@ public class Voter {
     }
 
     public Voter getVoterById(int voterId) {
-        VoterDbo vdo = new VoterDbo();
-        vdo.connectToDB();
-        return vdo.getVoterObjectById(voterId);
+        vdbo = new VoterDbo();
+        vdbo.connectToDB();
+        return vdbo.getVoterObjectById(voterId);
     }
 
     /* Method to retrieve voter profile details

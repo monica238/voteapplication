@@ -6,10 +6,11 @@ package voteapplication;
  */
 /* Class definition to access admin login*/
 public class Admin {
+    private AdminDbo ado;
 
     /* Method to validate admin login*/
     public boolean validateAdminLogin(String userName, String password) {
-        AdminDbo ado = new AdminDbo();
+        ado = new AdminDbo();
         ado.connectToDB();
         return ado.authenticateAdmin(userName, password);
     }

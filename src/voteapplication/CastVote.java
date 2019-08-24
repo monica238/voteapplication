@@ -9,9 +9,10 @@ public class CastVote {
 
     private Voter voterInstance;
     private Candidate candidateInstance;
-
+    private CastVoteDbo cvdbo;
+    
     public void castVote() {
-        CastVoteDbo cvdbo = new CastVoteDbo();
+        cvdbo = new CastVoteDbo();
         cvdbo.connectToDB();
         cvdbo.createCastVote(this);
     }
@@ -22,7 +23,7 @@ public class CastVote {
     }
 
     public boolean checkIfVotingIsDone(int voterId) {
-        CastVoteDbo cvdbo = new CastVoteDbo();
+        cvdbo = new CastVoteDbo();
         cvdbo.connectToDB();
         return cvdbo.checkIfVotingIsDone(voterId);
     }
