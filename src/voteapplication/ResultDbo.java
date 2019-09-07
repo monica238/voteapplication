@@ -1,7 +1,7 @@
 package voteapplication;
 
 import java.sql.*;
-import org.apache.log4j.*;
+//import org.apache.log4j.*;
 
 /*
  * @author 
@@ -9,7 +9,7 @@ import org.apache.log4j.*;
 public class ResultDbo {
 
     Connection conn;
-    Logger applog;
+   // Logger applog;
 
     /* connectToDB() */
     public boolean connectToDB() {
@@ -34,9 +34,41 @@ public class ResultDbo {
             //applog.info("DB connection successful!");
             return true;
         } /* Return Success or Failure */ catch (Exception e) {
-            applog.error(e);
+          //  applog.error(e);
         }
         return false;
     }
+    public void closeDbConnection() {
+        try {
+            conn.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+   public boolean checkResults( int candidateId)
+   {
+     String SQLStatement;
+        Statement SelectStatement = null;
 
-}
+        /* 2. Execure SQL Statement for Insert */
+        try {
+            SQLStatement = "Select candidate.candidateId,candidateFirstName,candidatePartyName,count(candidate.candidateId)as voteCount from candidate,castVote where candidate.candidateId=castVote.candidateId group by candidate.candidateId,candidateFirstName,candidatePartyName";
+            SelectStatement = conn.createStatement();
+            SelectStatement.execute(SQLStatement);
+
+            ResultSet voterData = SelectStatement.getResultSet();
+            voterData.next();
+            if (voterData.getInt("count") > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("No votes found for candidateId:" +candidateId );
+        }
+        /* Rerurn Success or Failure*/
+        return false;
+    }
+  
+   }
+    
+
+

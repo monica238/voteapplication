@@ -264,7 +264,8 @@ public class Voteapplication {
 
     /* Method to calculate results */
     public static Result votingresults() {
-        return null;
+        Result ro=new Result();
+        return ro.getVoteCount(count);
     }
 
 }

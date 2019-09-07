@@ -1,7 +1,7 @@
 package voteapplication;
 
 import java.sql.*;
-import org.apache.log4j.*;
+//import org.apache.log4j.*;
 
 /**
  *
@@ -10,7 +10,7 @@ import org.apache.log4j.*;
 public class CastVoteDbo {
 
     Connection conn;
-    Logger applog;
+  //  Logger applog;
 
     /* connectToDB() */
     public boolean connectToDB() {
@@ -35,7 +35,7 @@ public class CastVoteDbo {
             //applog.info("DB connection successful!");
             return true;
         } /* Return Success or Failure */ catch (Exception e) {
-            applog.error(e);
+    //        applog.error(e);
         }
         return false;
     }

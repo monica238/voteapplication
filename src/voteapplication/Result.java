@@ -16,8 +16,8 @@ public class Result {
     private String candidateFirstName;
     private int count;         /*variable to hold the count of total number of votes*/
 
-    private String result;     /* variable result to display the winner in the election*/
-
+    private String result;      /* variable result to display the winner in the election*/
+    private ResultDbo rdbo;
     /*Method to accept candidate Id*/
 
     public int getCandidateId() {
@@ -46,9 +46,15 @@ public class Result {
     }
 
     /*Method to count the votes*/
-    public int getVoteCount() {
+    public int getVoteCount(int count) {
         CastVote castVoteInstance = new CastVote();
         return count;
     }
+    public boolean checkResults(int candidateId) {
+       ResultDbo rdbo = new ResultDbo();
+        rdbo.connectToDB();
+        return rdbo.checkResults(candidateId);
+    }
+
 
 }

@@ -1,7 +1,7 @@
 package voteapplication;
 
 import java.sql.*;
-import org.apache.log4j.*;
+//import org.apache.log4j.*;
 
 /**
  * @author
@@ -10,10 +10,10 @@ public class CandidateDbo {
 
     Voter connection;//DB Connection Object declaration
     Connection conn;
-    Logger applog;
+   // Logger applog;
 
     public CandidateDbo() {
-        applog = Logger.getLogger(VoterDbo.class);
+      //  applog = Logger.getLogger(VoterDbo.class);
 
     }
     /* connectToDB() */
@@ -40,7 +40,7 @@ public class CandidateDbo {
             //applog.info("DB connection successful!");
             return true;
         } /* Return Success or Failure */ catch (Exception e) {
-            applog.error(e);
+           // applog.error(e);
         }
         return false;
     }
