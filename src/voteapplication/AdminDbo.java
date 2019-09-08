@@ -1,7 +1,7 @@
 package voteapplication;
 
 import java.sql.*;
-//import org.apache.log4j.*;
+import org.apache.log4j.*;
 
 /**
  * @author Monica
@@ -10,15 +10,15 @@ import java.sql.*;
 public class AdminDbo {
 
     private Connection conn;
-   // private Logger applog;
+    private Logger applog;
 
     public AdminDbo()
     {
-       // applog=Logger.getLogger(AdminDbo.class);
+       applog=Logger.getLogger(AdminDbo.class);
         String str;
         // Get Path of the current project folder
         str=System.getProperty("user.dir");        
-       // PropertyConfigurator.configure(str+"\\src\\voteapplication\\log4j.properties");                        
+        PropertyConfigurator.configure(str+"\\src\\voteapplication\\log4j.properties");                        
     }
     
     /* connectToDB() */
@@ -37,14 +37,14 @@ public class AdminDbo {
             /*Register JDBC driver*/
             Class.forName("com.mysql.jdbc.Driver");
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Voting", USER, PASS);
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/voteapplication", USER, PASS);
 
             /* Open a connection */
             System.out.println("Connecting to database");
-            //applog.info("DB connection successful!");
+            applog.info("DB connection successful!");
             return true;
         } /* Return Success or Failure */ catch (Exception e) {
-           // applog.error(e);
+            applog.error(e);
         }
         return false;
     }
@@ -65,14 +65,14 @@ public class AdminDbo {
 
             if (rs.next()) 
             {
-               // applog.info("Authentication Successful!");
+                applog.info("Authentication Successful!");
                 return true;
             }
         } catch (Exception e) {
-           // applog.error(e);
+            applog.error(e);
         }
         closeDbConnection();
-       // applog.info("Authentication Failure!");
+        applog.info("Authentication Failure!");
         return false;
 
     }

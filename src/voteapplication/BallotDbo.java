@@ -3,8 +3,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-//import org.apache.log4j.Logger;
+import org.apache.log4j.Logger;
 import java.util.ArrayList;
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -13,10 +14,21 @@ import java.util.ArrayList;
 public class BallotDbo {
 
     private Connection conn;
- //   private Logger applog;
+    private Logger applog;
+    
+    public BallotDbo()
+    {
+       applog=Logger.getLogger(BallotDbo.class);
+        String str;
+        // Get Path of the current project folder
+        str=System.getProperty("user.dir");        
+        PropertyConfigurator.configure(str+"\\src\\voteapplication\\log4j.properties");                        
+    }
+    
 
     /* connectToDB() */
     public boolean connectToDB() {
+       
         /* Create DB Connection */
         /* JDBC driver name and database url */
         final String jdbc_driver = "com.mysql.jdbc.driver";
@@ -31,14 +43,15 @@ public class BallotDbo {
             /*Register JDBC driver*/
             Class.forName("com.mysql.jdbc.Driver");
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Voting", USER, PASS);
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/voteapplication", USER, PASS);
 
             /* Open a connection */
             System.out.println("Connecting to database");
-            //applog.info("DB connection successful!");
+            applog.info("DB connection successful!");
             return true;
-        } /* Return Success or Failure */ catch (Exception e) {
-           // applog.error(e);
+          } /* Return Success or Failure */ 
+        catch (Exception e) {
+            applog.error(e);
         }
         return false;
     }
@@ -59,7 +72,7 @@ public class BallotDbo {
             SQLStatement.execute("insert into Ballot_candidates select \"101\" as ballotid,candidateid from candidate");
             return true;
         } catch (Exception e) {
-           // applog.error(e);
+            applog.error(e);
         }
         return false;
 

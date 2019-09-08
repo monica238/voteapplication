@@ -1,7 +1,9 @@
 package voteapplication;
-
 import java.sql.*;
-//import org.apache.log4j.*;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import org.apache.log4j.*;
 
 /*
  * @author 
@@ -9,7 +11,7 @@ import java.sql.*;
 public class ResultDbo {
 
     Connection conn;
-   // Logger applog;
+    Logger applog;
 
     /* connectToDB() */
     public boolean connectToDB() {
@@ -27,14 +29,14 @@ public class ResultDbo {
             /*Register JDBC driver*/
             Class.forName("com.mysql.jdbc.Driver");
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Voting", USER, PASS);
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Voteapplication", USER, PASS);
 
             /* Open a connection */
             System.out.println("Connecting to database");
-            //applog.info("DB connection successful!");
+            applog.info("DB connection successful!");
             return true;
         } /* Return Success or Failure */ catch (Exception e) {
-          //  applog.error(e);
+            applog.error(e);
         }
         return false;
     }
@@ -45,27 +47,32 @@ public class ResultDbo {
             System.out.println(e);
         }
     }
-   public boolean checkResults( int candidateId)
+   public ArrayList<String> checkResults()
    {
-     String SQLStatement;
+        String SQLStatement;
         Statement SelectStatement = null;
+        ArrayList<String> results=new ArrayList<String>();
 
         /* 2. Execure SQL Statement for Insert */
         try {
-            SQLStatement = "Select candidate.candidateId,candidateFirstName,candidatePartyName,count(candidate.candidateId)as voteCount from candidate,castVote where candidate.candidateId=castVote.candidateId group by candidate.candidateId,candidateFirstName,candidatePartyName";
+            SQLStatement = "Select candidate.candidateId,candidateFirstName,candidatePartyName,count(candidate.candidateId)as voteCount from candidate,Ballot,castVote where candidate.candidateId=castVote.candidateId,Ballot.candidateId=castVote.candidateId group by candidate.candidateId,candidateFirstName,candidatePartyName";
             SelectStatement = conn.createStatement();
             SelectStatement.execute(SQLStatement);
 
             ResultSet voterData = SelectStatement.getResultSet();
-            voterData.next();
-            if (voterData.getInt("count") > 0) {
-                return true;
+            while(voterData.next())
+            {
+                String result_rows;
+                result_rows=voterData.getString("candidateId")+"|"+voterData.getString("candidateFirstName")+"|"+voterData.getString("candidatePartyName")+"|"+voterData.getString("voteCount");
+                results.add(result_rows);
             }
+            return results;
+            
         } catch (Exception e) {
-            System.out.println("No votes found for candidateId:" +candidateId );
+            System.out.println("No votes found ");
         }
         /* Rerurn Success or Failure*/
-        return false;
+        return null;
     }
   
    }

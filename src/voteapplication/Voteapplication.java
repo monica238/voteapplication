@@ -263,9 +263,20 @@ public class Voteapplication {
     }
 
     /* Method to calculate results */
-    public static Result votingresults() {
+    public static void votingresults() 
+    {
+        
         Result ro=new Result();
-        return ro.getVoteCount(count);
+        ArrayList<String> results;
+        
+        results=ro.checkResults();
+        
+        if(results!=null)
+        
+            for(int i=0;i<results.size();i++)
+                System.out.println(results.get(i));
+        }
+        
     }
 
-}
+

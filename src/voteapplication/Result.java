@@ -1,5 +1,7 @@
 package voteapplication;
 
+import java.util.ArrayList;
+
 
 
 /**
@@ -50,10 +52,11 @@ public class Result {
         CastVote castVoteInstance = new CastVote();
         return count;
     }
-    public boolean checkResults(int candidateId) {
+    public ArrayList<String> checkResults() 
+    {
        ResultDbo rdbo = new ResultDbo();
         rdbo.connectToDB();
-        return rdbo.checkResults(candidateId);
+        return rdbo.checkResults();
     }
 
 

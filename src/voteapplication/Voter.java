@@ -41,6 +41,7 @@ public class Voter {
         return false;
 
     }
+    
 
     public Voter getVoterById(int voterId) {
         vdbo = new VoterDbo();

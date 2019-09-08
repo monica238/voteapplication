@@ -1,7 +1,7 @@
 package voteapplication;
 
 import java.sql.*;
-//import org.apache.log4j.*;
+import org.apache.log4j.*;
 
 /**
  * @author
@@ -10,10 +10,10 @@ public class VoterDbo {
 
     Voter connection;//DB Connection Object declaration
     Connection conn;
-   // Logger applog;
+    Logger applog;
 
     public VoterDbo() {
-       // applog = Logger.getLogger(VoterDbo.class);
+        applog = Logger.getLogger(VoterDbo.class);
 
     }
     /* connectToDB() */
@@ -33,13 +33,13 @@ public class VoterDbo {
             /*Register JDBC driver*/
             Class.forName("com.mysql.jdbc.Driver");
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Voting", USER, PASS);
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Voteapplication", USER, PASS);
             /* Open a connection */
             System.out.println("Connecting to database");
-            //applog.info("DB connection successful!");
+            applog.info("DB connection successful!");
             return true;
         } /* Return Success or Failure */ catch (Exception e) {
-           // applog.error(e);
+            applog.error(e);
         }
         return false;
     }
